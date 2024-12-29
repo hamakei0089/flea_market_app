@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ItemController;
 
 /*
@@ -15,19 +16,24 @@ use App\Http\Controllers\ItemController;
 |
 */
 Route::get('/', [ItemController::class, 'index']);
-Route::view('/register', 'auth.register')->name('register');
-Route::view('/login', 'auth.login')->name('login');
+
+/*会員登録*/
+Route::get('/register', [AuthController::class, 'index']);
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+
+/*ログイン*/
+Route::get('/login', [AuthController::class, 'index']);
+Route::post('/login', [AuthController::class, 'authenticated'])->name('login');
 
 
+/*メール認証*/
+Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+    ->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->middleware('auth')->name('verification.resend');
+
+/*user*/
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/listing', [ItemController::class, 'list_index']);
-    Route::post('/listing', [ItemController::class, 'list']);
-    Route::get('/purchase', [ItemController::class, 'purchase_index']);
-    Route::post('/purchase', [ItemController::class, 'purchase']);
+    Route::get('/mypage/profile', [RegisterController::class, 'showProfileForm'])->name('profile.form');
+    Route::post('/mypage/profile', [RegisterController::class, 'updateProfile'])->name('profile.update');
 });
-
-Route::view('/register', 'auth.register')->name('register');
-Route::view('/login', 'auth.login')->name('login');
-Route::view('/profile', 'auth.profile')->name('profile.edit');
-Route::view('/password', 'auth.password')->name('password.edit');
-Route::view('/reset-password/{token}', 'auth.reset-password')->name('password.reset');

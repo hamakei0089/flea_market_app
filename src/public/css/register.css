@@ -11,16 +11,12 @@
 
 .form {
     margin: 0 auto;
-    width: 25%;
-    text-align: center;
+    width: 37%;
 }
 
-.form__group {
-    margin-bottom: 5px;
-}
-
-.form__group-title {
+.form__theme {
     text-align: left;
+    margin-bottom: 5px;
 }
 
 .form__error {
@@ -29,32 +25,32 @@
     text-align: left;
 }
 
-.form__input--text input {
-    padding: 10px;
+.form__input--text input{
+    padding: 5px;
     width: 100%;
-    height: 40px;
+    height: 35px;
     border: 1px solid #ddd;
     border-radius: 3px;
-
     appearance: none;
 }
 
-.form__button {
-    margin-top: 20px;
-}
-
 .form__button-submit {
+    font-size: large;
     padding: 10px;
-    width: 30%;
+    margin-top: 60px;
+    width: 100%;
     height: 50px;
     border: none;
     border-radius: 3px;
-    background: #000;
+    background: #ff5555;
     color: #fff;
     cursor: pointer;
 }
 
-.login__link {
-    margin-top: 20px;
+.login__button-submit {
+    display: block;
+    margin-top: 30px;
     text-align: center;
+    text-decoration: none;
+    color: rgb(141, 174, 235);
 }

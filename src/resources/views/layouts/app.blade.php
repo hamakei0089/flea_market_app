@@ -16,6 +16,8 @@
     <div class="header__inner">
       <div class="header-utilities">
         <img src="{{ asset('images/logo.svg') }}" alt="Logo">
+
+        @auth
         <nav>
           <ul class="header-nav">
             <li class="header-nav__item">
@@ -35,6 +37,8 @@
             </li>
           </ul>
         </nav>
+        @endauth
+
       </div>
     </div>
   </header>

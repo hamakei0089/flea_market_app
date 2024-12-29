@@ -12,10 +12,9 @@ class ItemController extends Controller
 
     $items = Item::all();
 
-    // ログインしている場合、出品した商品も取得
     $userItems = auth()->check() ? Item::where('user_id', auth()->id())->get() : [];
 
-    return view('items.index', compact('items', 'userItems'));
+    return view('index', compact('items', 'userItems'));
 }
 
 }
