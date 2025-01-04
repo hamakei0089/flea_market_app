@@ -19,7 +19,7 @@
         もしメールを受け取っていない場合は、以下のボタンで再送信することができます。
     </p>
 
-    <form method="POST" action="{{ route('verification.send') }}">
+    <form method="POST" action="{{ route('verification.resend') }}">
         @csrf
         <button type="submit" class="btn resend-btn">確認メールを再送信</button>
     </form>

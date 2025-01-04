@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_auth')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
@@ -9,13 +9,13 @@
   <div class="register-form__heading">
     <h2>プロフィール設定</h2>
   </div>
-  <form class="form" action="/register" method="post">
+  <form class="form" action="{{ route('profile.update') }}" method="post">
     @csrf
 
       <div class="form__group">
         <h3 class="form__theme">ユーザー名</h3>
         <div class="form__input--text">
-          <input type="text" name="name" value="{{ old('name') }}" />
+          <input type="text" name="name" value="{{ old('name' , $user->name) }}" />
         </div>
         <div class="form__error">
           @error('name')

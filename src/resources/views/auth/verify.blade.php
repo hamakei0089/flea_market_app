@@ -14,7 +14,7 @@
 
         <p>メールが届かない場合は、下記のボタンをクリックして再送信できます。</p>
 
-        <form method="POST" action="{{ route('verification.send') }}">
+        <form method="POST" action="{{ route('verification.resend') }}">
             @csrf
             <button type="submit">確認メールを再送信</button>
         </form>

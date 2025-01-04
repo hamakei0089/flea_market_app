@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
 {
@@ -28,17 +29,22 @@ class RegisteredUserController extends Controller
     {
         $user = $creator->create($request->validated());
 
+        Auth::login($user);
+
         $user->sendEmailVerificationNotification();
 
-        /*event(new Registered($user));*/
-
-        return redirect('/login');
+        return redirect()->route('profile.form');
     }
+
 
     public function showProfileForm(Request $request)
     {
-        return view('auth.profile');
+        $user = auth()->user();
+
+        return view('auth.profile' , ['user' => $user]);
     }
+
+
     public function updateProfile(Request $request)
     {
         $request->validate([
@@ -46,6 +52,7 @@ class RegisteredUserController extends Controller
         'name' => 'required|string|max:255',
         'post_code' => 'required',
         'address' => 'required',
+        'building' => 'nullable|string|max:255',
     ]);
 
         $user = $request->user();
@@ -58,5 +65,7 @@ class RegisteredUserController extends Controller
         'building'=> $request -> input('building'),
         'is_profile_complete' => true,
     ]);
+
+    return redirect('/');
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\ItemController;
 
 /*
@@ -18,7 +19,7 @@ use App\Http\Controllers\ItemController;
 Route::get('/', [ItemController::class, 'index']);
 
 /*会員登録*/
-Route::get('/register', [AuthController::class, 'index']);
+Route::get('/register', [RegisteredUserController::class, 'index']);
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 /*ログイン*/
@@ -34,6 +35,6 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->mi
 
 /*user*/
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/mypage/profile', [RegisterController::class, 'showProfileForm'])->name('profile.form');
-    Route::post('/mypage/profile', [RegisterController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/mypage/profile', [RegisteredUserController::class, 'showProfileForm'])->name('profile.form');
+    Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
 });
