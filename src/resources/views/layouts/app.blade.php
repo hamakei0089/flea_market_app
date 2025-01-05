@@ -17,17 +17,24 @@
       <div class="header-utilities">
         <img src="{{ asset('images/logo.svg') }}" alt="Logo">
 
-        @auth
         <nav>
           <ul class="header-nav">
             <li class="header-nav__item">
-              <a class="header-nav__link" href="/mypage">マイページ</a>
+
+              @auth
+              <form action="{{ route('logout') }}" method="POST">
+              @csrf
+                <button type="submit" class="header-nav__link" >ログアウト</button>
+              </form>
+              @endauth
+
+              @guest
+              <a class="header-nav__link" href="/login">ログイン</a>
+              @endguest
+
             </li>
             <li class="header-nav__item">
-              <form class="form" action="/logout" method="post">
-                @csrf
-                <button class="header-nav__button">ログアウト</button>
-              </form>
+              <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
             <li class="header-nav__item">
               <form class="form" action="/logout" method="get">
@@ -37,7 +44,6 @@
             </li>
           </ul>
         </nav>
-        @endauth
 
       </div>
     </div>

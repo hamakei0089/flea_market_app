@@ -53,16 +53,26 @@ class RegisteredUserController extends Controller
         'post_code' => 'required',
         'address' => 'required',
         'building' => 'nullable|string|max:255',
+        'thumbnail' => 'nullable',
     ]);
 
         $user = $request->user();
 
+        if ($request->hasFile('thumbnail')) {
+
+        $image_path = $request->file('thumbnail')->store('public/thumbnails');
+
+        $thumbnail_name = basename($image_path);
+    } else {
+        $thumbnail_name = null;
+    }
         $user -> update([
 
         'name'=> $request -> input('name'),
         'post_code'=> $request -> input('post_code'),
         'address'=> $request -> input('address'),
         'building'=> $request -> input('building'),
+        'thumbnail' => $thumbnail_name,
         'is_profile_complete' => true,
     ]);
 

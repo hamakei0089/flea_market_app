@@ -16,18 +16,34 @@ class Item extends Model
         'is_purchased',
     ];
 
+    public function user()
+    {
+
+    return $this->belongsTo(User::class);
+
+    }
+
     public function categories()
-{
+    {
+
     return $this->belongsToMany(Category::class);
-}
-    public function condition()
-{
+
+    }
+
+    public function conditions()
+    {
+
     return $this->hasMany(Condition::class);
-}
-    public function purchase()
-{
+
+    }
+
+    public function purchases()
+
+    {
+
     return $this->hasMany(Purchase::class);
-}
+
+    }
 
 
 }

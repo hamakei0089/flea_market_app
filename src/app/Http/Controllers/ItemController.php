@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     public function index()
 {
+    $allItems = Item::all();
 
-    $items = Item::all();
+    $user = Auth::user();
+    $myLists = $user ->favorites()->get();
 
-    $userItems = auth()->check() ? Item::where('user_id', auth()->id())->get() : [];
-
-    return view('index', compact('items', 'userItems'));
+    return view('index' , compact('allItems' , 'user', 'myLists'));
 }
 
 }
