@@ -8,14 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function index()
-{
-    $allItems = Item::all();
+    public function index(Request $request)
+    {
+        $Items = Item::all();
+        $viewTypes = $request ->get('page' , 'all' );
 
-    $user = Auth::user();
-    $myLists = $user ->favorites()->get();
+        $user = Auth::user();
+        $myLists = [];
 
-    return view('index' , compact('allItems' , 'user', 'myLists'));
-}
+        if($user){
+
+        $myLists = $user ->favorites()->get();
+
+        }
+
+        return view('index' , compact('Items' , 'viewTypes' , 'user', 'myLists'));
+    }
+
+public function show()
+    {
+        $item = Item::findOrFail($id);
+
+        return view('detail' , compact('item'));
+    }
 
 }

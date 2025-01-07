@@ -16,7 +16,8 @@ use App\Http\Controllers\ItemController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.detail');
 
 /*会員登録*/
 Route::get('/register', [RegisteredUserController::class, 'index']);
@@ -37,4 +38,6 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->mi
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [RegisteredUserController::class, 'showProfileForm'])->name('profile.form');
     Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
+
+    Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
 });
