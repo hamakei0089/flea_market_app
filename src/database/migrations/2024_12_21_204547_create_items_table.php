@@ -17,9 +17,12 @@ return new class extends Migration
             $table->unsignedInteger('price');
             $table->text('description')->nullable();
             $table->boolean('is_purchased')->default(false);
+            $table->string('thumbnail')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('condition_id');
             $table->timestamps();
 
+        $table->foreign('user_id')->references('id')->on('users');
         $table->foreign('condition_id')->references('id')->on('conditions');
         });
     }

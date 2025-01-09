@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -15,61 +17,21 @@ class CategoriesTableSeeder extends Seeder
 
     DB::table('categories')->insert([
 
-            [
-            'name' => 'ファッション',
-            ],
 
-            [
-            'name' => '家電',
-            ],
-
-            [
-            'name' => 'インテリア',
-            ],
-
-            [
-            'name' => 'レディース',
-            ],
-
-            [
-            'name' => 'メンズ',
-            ],
-
-            [
-            'name' => 'コスメ',
-            ],
-
-            [
-            'name' => '本',
-            ],
-
-            [
-            'name' => 'ゲーム',
-            ],
-
-            [
-            'name' => 'スポーツ',
-            ],
-
-            [
-            'name' => 'キッチン',
-            ],
-
-            [
-            'name' => 'ハンドメイド',
-            ],
-
-            [
-            'name' => 'アクセサリー',
-            ],
-
-            [
-            'name' => 'おもちゃ',
-            ],
-
-            [
-            'name' => 'ベビー・キッズ',
-            ],
+            ['name' => 'ファッション'],
+            ['name' => '家電'],
+            ['name' => 'インテリア'],
+            ['name' => 'レディース'],
+            ['name' => 'メンズ'],
+            ['name' => 'コスメ'],
+            ['name' => '本'],
+            ['name' => 'ゲーム'],
+            ['name' => 'スポーツ'],
+            ['name' => 'キッチン'],
+            ['name' => 'ハンドメイド'],
+            ['name' => 'アクセサリー'],
+            ['name' => 'おもちゃ'],
+            ['name' => 'ベビー・キッズ'],
 
         ]);
     }
