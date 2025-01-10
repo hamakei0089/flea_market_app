@@ -26,7 +26,7 @@ class Item extends Model
     public function categories()
     {
 
-    return $this->belongsToMany(Category::class);
+    return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');
 
     }
 
@@ -44,10 +44,10 @@ class Item extends Model
 
     }
 
-    public function conditions()
+    public function condition()
     {
 
-    return $this->hasMany(Condition::class);
+    return $this->belongsTo(Condition::class);
 
     }
 

@@ -25,9 +25,11 @@ class ItemController extends Controller
         return view('index' , compact('Items' , 'viewTypes' , 'user', 'myLists'));
     }
 
-public function show()
+public function show($id)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::withCount(['favorites', 'comments'])
+                ->with(['categories','condition','comments.user'])
+                ->findOrFail($id);
 
         return view('detail' , compact('item'));
     }

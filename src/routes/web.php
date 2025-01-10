@@ -17,7 +17,7 @@ use App\Http\Controllers\ItemController;
 |
 */
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.detail');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.detail');
 
 /*会員登録*/
 Route::get('/register', [RegisteredUserController::class, 'index']);
@@ -40,4 +40,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
 
     Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'index'])->name('item.purchase');
 });
