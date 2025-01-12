@@ -15,8 +15,7 @@
   <header class="header">
     <div class="header__inner">
       <div class="header-utilities">
-        <img src="{{ asset('images/logo.svg') }}" alt="Logo">
-
+        <img src="{{ asset('storage/images/logo.svg') }}" alt="Logo">
         <nav>
           <ul class="header-nav">
             <li class="header-nav__item">
@@ -37,7 +36,7 @@
               <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
             <li class="header-nav__item">
-              <form class="form" action="/logout" method="get">
+              <form action="{{ route('listing.form') }}" method="get">
                 @csrf
                 <button class="header-nav__button">出品</button>
               </form>

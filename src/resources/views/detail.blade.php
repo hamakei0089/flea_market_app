@@ -12,7 +12,7 @@
         </div>
         <div>
             <h2>{{ $item->name }}</h2>
-               <h3>{{ $item->brand_name }}</h3>
+                <h3>{{ $item->brand_name }}</h3>
                     <p>{{ number_format($item->price) }}円 (税込)</p>
                     <table>
                         <thead>

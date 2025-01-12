@@ -18,7 +18,7 @@ class ItemController extends Controller
 
         if($user){
 
-        $myLists = $user ->favorites()->get();
+        $myLists = $user ->favorites()->with('item')->get();
 
         }
 

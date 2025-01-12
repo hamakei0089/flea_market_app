@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+
+@if(session('success'))
+    <p class="registration__success">{{ session('success') }}</p>
+@endif
+
 <div class="tabs-container">
     <ul class="tabs-menu">
         <li class="tab-item {{ $viewTypes === 'all' ? 'active' : '' }}">

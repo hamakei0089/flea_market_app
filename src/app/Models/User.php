@@ -61,4 +61,11 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     }
 
+    public function favorites()
+    {
+
+    return $this->hasMany(Favorite::class);
+
+    }
+
 }
