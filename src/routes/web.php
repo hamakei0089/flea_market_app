@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
@@ -25,8 +25,8 @@ Route::get('/register', [RegisteredUserController::class, 'index']);
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 /*ログイン*/
-Route::get('/login', [AuthController::class, 'index']);
-Route::post('/login', [AuthController::class, 'authenticated'])->name('login');
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
 /*メール認証*/

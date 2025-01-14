@@ -29,9 +29,9 @@ class RegisteredUserController extends Controller
     {
         $user = $creator->create($request->validated());
 
-        Auth::login($user);
-
         $user->sendEmailVerificationNotification();
+
+        Auth::login($user);
 
         return redirect()->route('profile.form');
     }
@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
 
         if ($request->hasFile('thumbnail')) {
 
-        $image_path = $request->file('thumbnail')->store('public/thumbnails');
+        $image_path = $request->file('thumbnail')->store('public/profiles');
 
         $thumbnail_name = basename($image_path);
     } else {
