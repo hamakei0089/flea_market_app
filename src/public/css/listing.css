@@ -14,3 +14,19 @@
 .custom-file-upload:hover {
     background-color: #2980b9;
 }
+
+.category-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}

@@ -11,8 +11,10 @@
         <form action="{{ route('listing.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for='thumbnail'class="custom-file-upload">画像を選択する</label>
-            <input type="file" name="thumbnail" id="thumbnail" class="form-control-file" style ="display: none;" />
+            <label for="thumbnail">
+                <input type="file" id="thumbnail" name="thumbnail" style="display: none;">
+                <button type="button">画像を選択する</button>
+            </label>
             <span id="file-name" style="display: none; margin-top: 10px;"></span>
         </div>
         <div>
@@ -21,15 +23,15 @@
                     @foreach ($categories as $category)
                     <button type="button" class="category-btn" data-category-id="{{ $category->id }}"> {{ $category->name }}
                     </button>
+                    <input type="hidden" name="categories[]" value="{{ $category->id }}" disabled>
                     @endforeach
-                    <input type="hidden" name="categories[]" id="selected-categories">
                 <label for='condition'>商品の状態</label>
-                    <select id="condition" name="condition"  required>
-            <option value="" disabled selected>選択してください</option>
-                @foreach($conditions as $condition)
-                    <option value="{{ $condition->name }}" {{ old('condition') == $condition->name ? 'selected' : '' }}>{{ $condition->name }}</option>
-                @endforeach
-        </select>
+                <select id="condition" name="condition"  required>
+                    <option value="" disabled selected>選択してください</option>
+                    @foreach($conditions as $condition)
+                        <option value="{{ $condition->name }}" {{ old('condition') == $condition->name ? 'selected' : '' }}>{{ $condition->name }}</option>
+                    @endforeach
+                </select>
             <h3>商品名と説明</h3>
                 <label for='name'>商品名</label>
                     <input type="text" name='name'value="{{ old('name') }}">

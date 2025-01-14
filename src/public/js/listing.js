@@ -1,46 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const label = document.querySelector('.custom-file-upload');
+    const button = document.querySelector('label button');
     const fileInput = document.getElementById('thumbnail');
-    const fileNameDisplay = document.getElementById('file-name');
+    const fileNameSpan = document.getElementById('file-name');
 
-    label.addEventListener('click', (e) => {
-        e.preventDefault();
-        fileInput.click();
+    button.addEventListener('click', () => {
+    fileInput.click();
     });
 
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-
-            fileNameDisplay.textContent = file.name;
-            fileNameDisplay.style.display = 'block';
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            fileNameSpan.textContent = fileName;
+            fileNameSpan.style.display = 'inline';
+        } else {
+            fileNameSpan.style.display = 'none';
         }
     });
 
     const categoryButtons = document.querySelectorAll('.category-btn');
-    const selectedCategoriesInput = document.getElementById('selected-categories');
 
     categoryButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const categoryId = this.dataset.categoryId;
+    button.addEventListener('click', function () {
+        const categoryId = this.dataset.categoryId;
+        const hiddenInput = this.nextElementSibling;
 
-            // すでにカテゴリーが選択されているか確認
-            let selectedCategories = selectedCategoriesInput.value
-                ? selectedCategoriesInput.value.split(',')
-                : [];
-
-            if (selectedCategories.includes(categoryId)) {
-                // 既存の場合は削除
-                selectedCategories = selectedCategories.filter(id => id !== categoryId);
-                this.classList.remove('selected'); // ボタンの見た目を更新
-            } else {
-                // 新規の場合は追加
-                selectedCategories.push(categoryId);
-                this.classList.add('selected'); // ボタンの見た目を更新
-            }
-
-            // hidden input に値を設定
-            selectedCategoriesInput.value = selectedCategories.join(',');
+        if (hiddenInput.disabled) {
+            hiddenInput.disabled = false;
+            this.classList.add('selected');
+        } else {
+            hiddenInput.disabled = true;
+            this.classList.remove('selected');
+        }
         });
     });
 });
+
