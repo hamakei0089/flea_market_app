@@ -20,11 +20,11 @@ class SellController extends Controller
 
     public function store(Request $request)
 {
-    $image_path = $request->file('thumbnail')->store('public/images');
+    $image_path = $request->file('thumbnail')->store('images' , 'public');
     $condition = Condition::where('name', $request->input('condition'))->first();
 
     $item = Item::create([
-        'thumbnail' => basename($image_path),
+        'thumbnail' => $image_path,
         'condition_id' => $condition->id,
         'user_id' => Auth::id(),
         'name' => $request->input('name'),
