@@ -10,6 +10,16 @@
     <p class="registration__success">{{ session('success') }}</p>
 @endif
 
+@auth
+<div>
+    <img src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
+    <p>{{Auth::user()->name}}</p>
+    <form action="{{ route ('profile.update') }}" method="get">
+        <button type="button">プロフィールを編集</button>
+    </form>
+</div>
+@endauth
+
 <div class="tabs-container">
     <ul class="tabs-menu">
         <li class="tab-item {{ $viewTypes === 'all' ? 'active' : '' }}">
