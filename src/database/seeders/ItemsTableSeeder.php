@@ -45,7 +45,7 @@ class ItemsTableSeeder extends Seeder
             [
             'name' => '革靴',
             'price' => 4000,
-            'description' => '',
+            'description' => 'クラシックなデザインの革靴',
             'is_purchased' => false,
             'thumbnail' => 'images/leather_shoes.jpg',
             'condition_id' => '4',

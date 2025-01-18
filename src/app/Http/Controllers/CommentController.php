@@ -10,21 +10,22 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
 
-    public function store(Comment $request, $itemId)
+    public function store(Request $request, $item_id)
     {
-        $request->validate([
-            'comment' => 'required|string|max255',
+        $validated = $request->validate([
+            'comment' => 'required|string|max:255',
         ]);
 
-        $item = Item::findOrFail($itemId);
+        $item = Item::findOrFail($item_id);
 
         Comment::create([
             'item_id' => $item->id,
             'user_id' => Auth::id(),
-            'comment' => $request->comment,
+            'comment' => $validated['comment'],
         ]);
 
-        return redirect()->route('items.detail');
+        return redirect()->route('item.detail' , ['item_id' => $item->id])
+                        ->with('success' , 'コメントを追加しました。');
 
     }
 }

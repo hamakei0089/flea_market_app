@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
 
     Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'index'])->name('item.purchase');
 
     Route::get('/sell', [SellController::class, 'index'])->name('listing.form');
     Route::post('/sell', [SellController::class, 'store'])->name('listing.store');
+
+    Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('item.favorite');
+
 });

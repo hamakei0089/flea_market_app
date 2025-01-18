@@ -48,6 +48,11 @@ class Item extends Model
 
     }
 
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id');
+    }
+
     public function condition()
     {
 
