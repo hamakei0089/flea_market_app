@@ -13,6 +13,12 @@
     @csrf
 
       <div class="form__group">
+        <img src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
+        <label for="thumbnail">
+                <input type="file" id="thumbnail" name="thumbnail" style="display: none;">
+                <button type="button">画像を選択する</button>
+        </label>
+            <span id="file-name" style="display: none; margin-top: 10px;"></span>
         <h3 class="form__theme">ユーザー名</h3>
         <div class="form__input--text">
           <input type="text" name="name" value="{{ old('name' , $user->name) }}" />
@@ -27,7 +33,7 @@
       <div class="form__group">
         <h3 class="form__theme">郵便番号</h3>
         <div class="form__input--text">
-          <input type="text" name="post_code" value="{{ old('post_code') }}" />
+          <input type="text" name="post_code" value="{{ old('post_code', $user->post_code) }}" />
         </div>
         <div class="form__error">
           @error('post_code')
@@ -39,7 +45,7 @@
     <div class="form__group">
       <h3 class="form__theme">住所</h3>
       <div class="form__input--text">
-        <input type="text" name="address" value="{{ old('address') }}"/>
+        <input type="text" name="address" value="{{ old('address' , $user->address) }}"/>
       </div>
       <div class="form__error">
         @error('address')
@@ -51,7 +57,7 @@
     <div class="form__group">
       <h3 class="form__theme">建物名</h3>
       <div class="form__input--text">
-        <input type="text" name="building" value="{{ old('building') }}"/>
+        <input type="text" name="building" value="{{ old('building' , $user->building) }}"/>
       </div>
       <div class="form__error">
         @error('building')

@@ -50,4 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('item.favorite');
 
+    Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->name('purchase.form');
+    Route::get('/purchase//address/{item}', [PurchaseController::class, 'editAddress'])->name('edit.address.');
+    Route::post('/purchase//address/{item}', [PurchaseController::class, 'updateAddress'])->name('update.address.');
+
 });

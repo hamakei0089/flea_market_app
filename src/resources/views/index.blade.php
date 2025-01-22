@@ -14,8 +14,8 @@
 <div>
     <img src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
     <p>{{Auth::user()->name}}</p>
-    <form action="{{ route ('profile.update') }}" method="get">
-        <button type="button">プロフィールを編集</button>
+    <form action="{{ route ('profile.form') }}" method="get">
+        <button type="submit">プロフィールを編集</button>
     </form>
 </div>
 @endauth

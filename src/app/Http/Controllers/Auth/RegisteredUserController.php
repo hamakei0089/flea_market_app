@@ -60,9 +60,9 @@ class RegisteredUserController extends Controller
 
         if ($request->hasFile('thumbnail')) {
 
-        $image_path = $request->file('thumbnail')->store('public/profiles');
+        $image_path = $request->file('thumbnail')->store('profiles' , 'public');
 
-        $thumbnail_name = basename($image_path);
+        $thumbnail_name = $image_path;
     } else {
         $thumbnail_name = null;
     }
@@ -76,6 +76,6 @@ class RegisteredUserController extends Controller
         'is_profile_complete' => true,
     ]);
 
-    return redirect('/');
+    return redirect('/')->with('success' , 'プロフィールを変更しました。');
     }
 }
