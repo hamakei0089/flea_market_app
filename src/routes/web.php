@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MypageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->mi
 
 /*user*/
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+
     Route::get('/mypage/profile', [RegisteredUserController::class, 'showProfileForm'])->name('profile.form');
     Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
 
