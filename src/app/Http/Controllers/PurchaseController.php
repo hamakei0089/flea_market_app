@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\User;
 
 class PurchaseController extends Controller
 {
-    public function index()
+    public function index(Item $item)
     {
-        $item=Item::all();
 
-        $user=User::select('post_code' , 'address' , 'building')->get();
+        $user = auth()->user();
 
-    return view('purchase' , compact('item' , 'user'));
+        return view('purchase' , compact('item' , 'user'));
     }
 
-    public function editAddress()
+    public function editAddress(Item $item)
     {
-        $user = auth()->user(['post_code' , 'address' , 'building']);
+        $user = auth()->user();
 
-        return view('edit-address' , compact('user'));
+        return view('edit-address' , compact('user' , 'item'));
     }
 
-    public function updateAddress(Request $request)
+    public function updateAddress(Request $request , Item $item)
     {
         $request->validate([
 
@@ -40,6 +41,6 @@ class PurchaseController extends Controller
         'building'=> $request -> input('building'),
     ]);
 
-    return view('purchase')->with('success' , '住所を変更しました。');
+    return redirect()->route('purchase.form', ['item' => $item->id])->with('success' , '住所を変更しました。');
     }
 }

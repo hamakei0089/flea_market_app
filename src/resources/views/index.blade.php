@@ -50,6 +50,7 @@
             @foreach ($myLists as $favorite)
             <div class="item-card">
                 <div class="item-thumbnail">
+                    <a href="{{ route('item.detail', ['item_id' => $item->id]) }}"></a>
                     <img src="{{ asset('storage/' . $favorite->item->thumbnail) }}" alt="{{ $favorite->item->name }}">
                 </div>
                 <p class="item-name">{{ $favorite->item->name }}</p>

@@ -20,7 +20,9 @@
         <nav>
           <ul class="header-nav">
             <li class="header-nav__item">
-
+              <input type="text" id="search-box" class="search-box" placeholder="なにをお探しですか？">
+            </li>
+            <li class="header-nav__item">
               @auth
               <form action="{{ route('logout') }}" method="POST">
               @csrf
@@ -52,6 +54,10 @@
   <main>
     @yield('content')
   </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

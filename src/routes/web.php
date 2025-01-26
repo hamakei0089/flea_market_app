@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,15 +47,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
 
-    Route::get('/purchase/{item_id}', [PurchaseController::class, 'index'])->name('item.purchase');
-
     Route::get('/sell', [SellController::class, 'index'])->name('listing.form');
     Route::post('/sell', [SellController::class, 'store'])->name('listing.store');
 
     Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('item.favorite');
 
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->name('purchase.form');
-    Route::get('/purchase//address/{item}', [PurchaseController::class, 'editAddress'])->name('edit.address.');
-    Route::post('/purchase//address/{item}', [PurchaseController::class, 'updateAddress'])->name('update.address.');
+    Route::get('/purchase/address/{item}', [PurchaseController::class, 'editAddress'])->name('edit.address');
+    Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('update.address');
 
 });
