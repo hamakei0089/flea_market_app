@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.querySelector('label button');
     const fileInput = document.getElementById('thumbnail');
@@ -34,4 +35,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-

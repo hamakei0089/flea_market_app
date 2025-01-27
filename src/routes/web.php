@@ -21,7 +21,7 @@ use App\Http\Controllers\PurchaseController;
 |
 */
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.detail');
+Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.detail');
 
 /*会員登録*/
 Route::get('/register', [RegisteredUserController::class, 'index']);
@@ -45,7 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [RegisteredUserController::class, 'showProfileForm'])->name('profile.form');
     Route::post('/mypage/profile', [RegisteredUserController::class, 'updateProfile'])->name('profile.update');
 
-    Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/items/{item}/comment', [CommentController::class, 'store'])->name('comment.store');
 
     Route::get('/sell', [SellController::class, 'index'])->name('listing.form');
     Route::post('/sell', [SellController::class, 'store'])->name('listing.store');

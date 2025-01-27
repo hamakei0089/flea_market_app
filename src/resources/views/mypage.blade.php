@@ -10,11 +10,11 @@
     <p class="registration__success">{{ session('success') }}</p>
 @endif
 
-<div>
-    <img src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
-    <p>{{$user->name}}</p>
-    <form action="{{ route ('profile.form') }}" method="get">
-        <button type="submit">プロフィールを編集</button>
+<div class="profile-info">
+    <img class="profile-thumbnail" src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
+    <p class="profile-name">{{Auth::user()->name}}</p>
+    <form action="{{ route('profile.form') }}" method="get">
+        <button type="submit" class="profile-edit-btn">プロフィールを編集</button>
     </form>
 </div>
 
@@ -27,6 +27,7 @@
             <a href="{{ route('mypage.index', ['page' => 'buy']) }}">購入した商品</a>
         </li>
     </ul>
+    <div class="tab-underline"></div>
 
     <div class="tab-content">
         @if ($viewTypes === 'sell')

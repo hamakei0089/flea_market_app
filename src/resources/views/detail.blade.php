@@ -19,11 +19,9 @@
                 <thead>
                     <tr>
                         <td>
-                            <button type="button" class="favorite-btn {{ $isFavorited ? 'bg-red-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700' }} text-white font-bold py-2 px-4 rounded" data-item-id="{{ $item->id }}">
-                                {{ $isFavorited ? '★' : '☆' }}
+                            <button class="favorite-btn" data-item-id="{{$item->id }}" data-favorite="{{ $isFavorited ? 'true' : 'false' }}">
+                            {!! $isFavorited ? '★' : '☆' !!}
                             </button>
-                            </button>
-                        </button>
                         </td>
                         <td>💬</td>
                     </tr>
@@ -38,7 +36,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{ route('item.purchase', ['item_id' => $item->id]) }}">購入手続きへ</a>
+        <a href="{{ route('purchase.form', ['item' => $item->id]) }}">購入手続きへ</a>
         <h2>商品説明</h2>
         <p>{{ $item->description }}</p>
         <h2>商品の情報</h2>
@@ -58,7 +56,7 @@
                 <p>{{ $comment->comment }}</p>
             @endforeach
         @endif
-        <form action="{{ route('comment.store', ['item_id'=> $item->id]) }}" method="post">
+        <form action="{{ route('comment.store', ['item'=> $item->id]) }}" method="post">
             @csrf
             <input type="text" name="comment">
             <button type="submit">コメントを送信する</button>

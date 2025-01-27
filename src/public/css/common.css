@@ -2,10 +2,9 @@
     background: #000;
 }
 
-.header__inner {
+.header-inner {
     margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    max-width: 90%;
 }
 
 .header-utilities {
@@ -14,32 +13,69 @@
     justify-content: space-between;
 }
 
-.header__logo {
+.header-logo {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 24px;
+    margin-right: 30px;
 }
 
 .header-utilities nav {
-    width: 18%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .header-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    padding: 0;
 }
 
-.header-nav__link {
+.header-nav-search {
+    flex-grow: 0.5;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+
+.header-nav-link {
     color: #fff;
     text-decoration: none;
 }
 
-.header-nav__button {
+.header-nav-btn {
     border: none;
     background: transparent;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+}
+
+.listing-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+.header-items {
+    width: 90%;
+    margin-left: 20px;
+    padding: 0 20px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

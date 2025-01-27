@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 class MypageController extends Controller
 {
     public function index(Request $request)
-    {
-
+{
     $user = auth()->user();
-    $viewTypes = $request ->get('sell' , 'buy' );
 
-    $sellItems = $user->items();
-    $buyItems = $user->purchases();
+    $viewTypes = $request->get('page', 'sell');
 
-    return view('mypage' , compact('user' , 'sellItems' , 'buyItems' ,'viewTypes'));
-    }
+    $sellItems = $user->items()->get();
+    $buyItems = $user->purchases()->get();
+
+    return view('mypage', compact('user', 'sellItems', 'buyItems', 'viewTypes'));
+}
 }
