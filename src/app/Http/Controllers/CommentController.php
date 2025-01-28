@@ -24,7 +24,7 @@ class CommentController extends Controller
             'comment' => $validated['comment'],
         ]);
 
-        return redirect()->route('item.detail' , ['item_id' => $item->id])
+        return redirect()->route('item.detail' , ['item' => $item->id])
                         ->with('success' , 'コメントを追加しました。');
 
     }

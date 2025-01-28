@@ -38,7 +38,6 @@
     transform: translateY(-50%)
 }
 
-/* フォーム要素 */
 .listing-form {
     display: flex;
     flex-direction: column;
@@ -99,7 +98,6 @@
     resize: vertical;
 }
 
-/* カテゴリボタン */
 .category-btn {
     display: inline-block;
     margin: 10px 4px;

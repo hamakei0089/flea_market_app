@@ -17,7 +17,9 @@
   <header class="header">
   <div class="header-inner">
     <div class="header-utilities">
+      <a href="/" class="header-logo">
       <img src="{{ asset('storage/images/logo.svg') }}" alt="Logo">
+      </a>
       <nav class="header-items">
         <ul class="header-nav">
           <li class="header-nav-search">
@@ -26,8 +28,8 @@
           <li class="header-nav-btn">
             @auth
               <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="header-nav-link">ログアウト</button>
+              @csrf
+                <button type="submit" class="header-nav-link logout-btn">ログアウト</button>
               </form>
             @endauth
 

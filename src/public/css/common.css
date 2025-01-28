@@ -44,13 +44,27 @@
 
 
 .header-nav-link {
-    color: #fff;
     text-decoration: none;
+    color: inherit;
 }
+
+.logout-btn {
+    font-size: 16px;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: transparent;
+    color: #fff;
+}
+
 
 .header-nav-btn {
     border: none;
-    background: transparent;
     color: #fff;
     font-size: 16px;
     cursor: pointer;

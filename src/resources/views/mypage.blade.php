@@ -11,7 +11,7 @@
 @endif
 
 <div class="profile-info">
-    <img class="profile-thumbnail" src="{{ asset('storage/' . $user->thumbnail) }}" alt="{{ $user->name }}">
+    <img class="profile-thumbnail" src="{{ $comment->user->thumbnail ? asset('storage/' . $comment->user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $comment->user->name }}" />
     <p class="profile-name">{{Auth::user()->name}}</p>
     <form action="{{ route('profile.form') }}" method="get">
         <button type="submit" class="profile-edit-btn">プロフィールを編集</button>
