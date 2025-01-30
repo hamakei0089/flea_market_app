@@ -1,51 +1,57 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
 @endsection
 
 @section('content')
-<div>
-    <div>
-        <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->name }}">
-        <h2>{{ $item->name }}</h2>
-        <p>¥{{ number_format ($item->price) }}</p>
-    </div>
+<div class="container">
+    <div class="left-content">
+        <div class="item-info">
+            <img class="item-thumbnail" src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->name }}">
+            <div class="item-text">
+                <p class="item-name">{{ $item->name }}</p>
+                <p class="item-price">¥{{ number_format($item->price) }}</p>
+            </div>
+        </div>
 
-    <div>
-        <h2>支払い方法</h2>
-        <select id="payment_method" class="payment_method" name="payment_method" placeholder="選択して下さい" required>選択して下さい
+        <div class="payment-section">
+            <h2 class="payment-title">支払い方法</h2>
+            <select id="payment-method" class="payment-select" name="payment_method" required>
+                <option value="" disabled selected>選択して下さい</option>
                 <option value="コンビニ支払い">コンビニ支払い</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
+        </div>
+
+        <div class="address-section">
+            <div class="address-header">
+                <h2 class="address-title">配送先</h2>
+                <a class="address-edit-link" href="{{ route('edit.address', ['item' => $item->id]) }}">変更する</a>
+            </div>
+            <p class="address-post-code">〒{{ substr($user->post_code, 0, 3) }}-{{ substr($user->post_code, 3) }}</p>
+            <p class="address-text">{{ $user->address }}  {{ $user->building }}</p>
+        </div>
     </div>
 
-    <div>
-        <h2>配送先</h2>
-        <a href="{{ route('edit.address' , ['item' => $item->id]) }}">変更する</a>
-        <p>{{ $user->post_code }}</p>
-        <p>{{ $user->address }}</p>
-        <p>{{ $user->building }}</p>
+    <div class="right-content">
+        <div class="summary-section">
+            <table class="summary-table">
+                <tr class="summary-row">
+                    <td class="summary-label">商品代金</td>
+                    <td class="summary-price">¥{{ number_format($item->price) }}</td>
+                </tr>
+                <tr class="summary-row">
+                    <td class="summary-label">支払い方法</td>
+                    <td class="summary-payment-method" id="payment-method-display">{{ old('payment_method', '選択されていません') }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <button type="submit" class="purchase-btn">購入する</button>
     </div>
-
-    <div>
-        <table>
-            <tr>
-                <td>商品代金</td>
-                <td>¥{{ number_format($item->price) }}</td>
-            </tr>
-
-            <tr>
-                <td>支払い方法</td>
-                <td id="payment_method_display">{{ old('payment_method', '選択されていません') }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <button type="submit">購入する</button>
-
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/payment.js') }}"></script>
 @endsection

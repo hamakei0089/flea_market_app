@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.left-content {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+    padding-bottom:40px;
+    border-bottom: 1px solid #000;
+}
+
+.item-thumbnail {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.item-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.item-price {
+    font-size: 20px;
+    margin: 0;
+}
+
+.payment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 40px 0 20px;
+    border-bottom: 1px solid #000;
+}
+
+.payment-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.payment-select {
+    width: 50%;
+    height: 30%;
+    font-size: 14px;
+    margin: 0 0 40px 50px;
+}
+
+.address-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #000;
+}
+
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 20px 0 20px;
+}
+
+.address-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.address-edit-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.address-edit-link:hover {
+    text-decoration: underline;
+}
+
+.address-post-code,
+.address-text,
+.address-building {
+    font-size: 14px;
+    color: #555;
+}
+
+.right-content {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.summary-section {
+    width: 100%;
+    padding:10px;
+    margin: 20px 20px;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-row {
+    width: 100%;
+}
+
+.summary-row:first-child {
+    border: 1.5px solid #000;
+}
+
+.summary-row:last-child {
+    border: 1.5px solid #000;
+}
+
+.summary-label {
+    padding: 15px 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.summary-price,
+.summary-payment-method {
+    padding: 20px 30px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.purchase-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff5555;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.purchase-btn:hover {
+    background-color: #0056b3;
+}
