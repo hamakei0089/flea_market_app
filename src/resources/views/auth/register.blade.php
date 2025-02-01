@@ -54,7 +54,7 @@
         <input type="password" name="password_confirmation" />
       </div>
       <div class="form-error">
-        @error('password')
+        @error('password_confirmation')
         {{ $message }}
         @enderror
       </div>

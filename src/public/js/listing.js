@@ -35,3 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.getElementById('condition').addEventListener('change', function() {
+        const select = this;
+        const defaultOption = select.querySelector('option[value=""]');
+
+        if (select.value !== "") {
+            defaultOption.style.display = 'none';
+        } else {
+            defaultOption.style.display = '';
+        }
+});

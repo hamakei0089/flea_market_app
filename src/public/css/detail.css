@@ -147,21 +147,19 @@
     margin-top: 20px;
 }
 
-.item-details-table th {
+.detail-title {
     text-align: left;
     width: 150px;
     padding: 10px;
     vertical-align: top;
 }
 
-.item-details-table td {
-    text-align: left;
-    padding: 10px;
-}
-
 .detail-values {
     display: flex;
     flex-wrap: wrap;
+    text-align: left;
+    padding: 10px;
+    margin-top: 4px;
 }
 
 .comments-list {

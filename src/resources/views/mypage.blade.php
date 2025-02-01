@@ -11,7 +11,7 @@
 @endif
 
 <div class="profile-info">
-    <img class="profile-thumbnail" src="{{ $comment->user->thumbnail ? asset('storage/' . $comment->user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $comment->user->name }}" />
+    <img class="profile-thumbnail" src="{{ $user->thumbnail ? asset('storage/' . $user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $user->name }}" />
     <p class="profile-name">{{Auth::user()->name}}</p>
     <form action="{{ route('profile.form') }}" method="get">
         <button type="submit" class="profile-edit-btn">プロフィールを編集</button>
@@ -35,7 +35,7 @@
             @foreach ($sellItems as $sellItem)
             <div class="item-card">
                 <div class="item-thumbnail">
-                    <a href="{{ route('item.detail', ['item_id' => $sellItem->id]) }}">
+                    <a href="{{ route('item.detail', ['item' => $sellItem->id]) }}">
                     <img src="{{ asset('storage/' . $sellItem->thumbnail) }}" alt="{{ $sellItem->name }}">
                     </a>
                 </div>

@@ -73,7 +73,10 @@
             @csrf
             <div class="comment-form">
                 <p class="comment-title">商品へのコメント</p>
-                    <textarea class="input-comment" name="comment" placeholder="ここにコメントを入力してください"></textarea>
+                    <textarea class="input-comment" name="comment" placeholder="ここにコメントを入力してください">{{ old('comment') }}</textarea>
+                        @error('comment')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
                 <button type="submit" class="comment-btn">コメントを送信する</button>
             </div>
         </form>

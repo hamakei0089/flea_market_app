@@ -37,6 +37,11 @@
         @enderror
       </div>
     </div>
+      <div class="form-error">
+        @error('login')
+        {{ $message }}
+        @enderror
+      </div>
     <div class="form-group">
       <button class="form-submit" type="submit">ログイン</button>
     </div>

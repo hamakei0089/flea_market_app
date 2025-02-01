@@ -45,7 +45,14 @@ class FortifyServiceProvider extends ServiceProvider
         $email = (string) $request->email;
 
         return Limit::perMinute(10)->by($email . $request->ip());
-        });
 
+        Fortify::validateRequestsUsing(function ($request) {
+        if ($request->is('items/*/comment')) {
+            Validator::make($request->all(), [
+                'comment' => ['required', 'max:255'],
+            ])->validate();
+        }
+        });
+        });
     }
 }
