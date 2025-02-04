@@ -11,15 +11,16 @@
 @endif
 
 <div class="tabs-container">
-    <ul class="tabs-menu">
-        <li class="tab-item {{ $viewTypes === 'all' ? 'active' : '' }}">
-            <a href="{{ route('items.index') }}">おすすめ</a>
-        </li>
-        <li class="tab-item {{ $viewTypes === 'mylist' ? 'active' : '' }}">
-            <a href="{{ route('items.index', ['page' => 'mylist']) }}">マイリスト</a>
-        </li>
-    </ul>
-    <div class="tab-underline"></div>
+    <div class="tab">
+        <ul class="tabs-menu">
+            <li class="tab-item {{ $viewTypes === 'all' ? 'active' : '' }}">
+                <a href="{{ route('items.index', ['search' => request()->query('search', '')]) }}">おすすめ</a>
+            </li>
+            <li class="tab-item {{ $viewTypes === 'mylist' ? 'active' : '' }}">
+                <a href="{{ route('items.index', ['page' => 'mylist', 'search' => request()->query('search', '')]) }}">マイリスト</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="tab-content">
         @if ($viewTypes === 'all')
@@ -27,7 +28,7 @@
             @foreach ($Items as $item)
             <div class="item-card">
                 <div class="item-thumbnail">
-                    <a href="{{ route('item.detail', ['item' => $item->id]) }}">
+                    <a href="{{ route('item.detail', ['item' => $item->id, 'search' => request()->query('search', '')]) }}">
                     <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->name }}">
                     </a>
                 </div>
@@ -41,7 +42,7 @@
             @foreach ($myLists as $favorite)
             <div class="item-card">
                 <div class="item-thumbnail">
-                    <a href="{{ route('item.detail', ['item' => $favorite->item->id]) }}">
+                    <a href="{{ route('item.detail', ['item' => $favorite->item->id, 'search' => request()->query('search', '')]) }}">
                     <img src="{{ asset('storage/' . $favorite->item->thumbnail) }}" alt="{{ $favorite->item->name }}">
                     </a>
                 </div>

@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+<form action="{{ route('checkout' , ['item' => $item->id]) }}" method="post">
+@csrf
 <div class="container">
     <div class="left-content">
         <div class="item-info">
@@ -19,8 +21,8 @@
             <h2 class="payment-title">支払い方法</h2>
             <select id="payment-method" class="payment-select" name="payment_method" required>
                 <option value="" disabled selected>選択して下さい</option>
-                <option value="コンビニ支払い">コンビニ支払い</option>
-                <option value="カード支払い">カード支払い</option>
+                <option value="convenience">コンビニ支払い</option>
+                <option value="card">カード支払い</option>
             </select>
         </div>
 
@@ -51,6 +53,7 @@
         <button type="submit" class="purchase-btn">購入する</button>
     </div>
 </div>
+</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/payment.js') }}"></script>

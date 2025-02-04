@@ -2,6 +2,11 @@
     margin-top: 20px;
 }
 
+.tab {
+    border-bottom: 2px solid black;
+    width: 100%;
+}
+
 .tabs-menu {
     display: flex;
     justify-content: flex-start;
@@ -24,11 +29,6 @@
 .tab-item.active a {
     font-weight: bold;
     color: #ff5555;
-}
-
-.tab-underline {
-    border-bottom: 2px solid black;
-    width: 100%;
 }
 
 .items-grid {

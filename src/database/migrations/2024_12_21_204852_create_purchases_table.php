@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id');
+            $table->string('purchase_method');
             $table->timestamps();
 
         $table->foreign('user_id')->references('id')->on('users');
