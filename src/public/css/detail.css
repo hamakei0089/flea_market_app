@@ -144,7 +144,7 @@
 .item-details-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+
 }
 
 .detail-title {
@@ -155,11 +155,12 @@
 }
 
 .detail-values {
+    font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     text-align: left;
     padding: 10px;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .comments-list {
@@ -259,4 +260,26 @@
 
 .comment-btn:hover {
     background-color: #218838;
+}
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .detail-values {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+
+.category-name {
+    display: inline-block;
+    margin: 8px 2px;
+    padding: 6px 8px;
+    font-size: 9px;
+    color: black;
+    background-color: rgb(177, 177, 177);
+    border-radius: 50px;
+    text-align: center;
+}
 }

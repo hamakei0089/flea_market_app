@@ -93,3 +93,17 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .header-logo img {
+        max-width: 150px;
+        height: auto;
+    }
+
+
+    .header-inner {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+}

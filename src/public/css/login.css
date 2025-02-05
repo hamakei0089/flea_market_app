@@ -58,3 +58,38 @@
     text-decoration: none;
     color: rgb(141, 174, 235);
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .login-content {
+        padding: 30px 20px;
+    }
+
+    .form {
+        width: 80%;
+    }
+
+    .login-title {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-size: 1rem;
+    }
+
+    .form-input input {
+        height: 40px;
+    }
+
+    .form-submit {
+        font-size: 1.1rem;
+        height: 55px;
+    }
+
+    .register-link {
+        font-size: 1rem;
+    }
+}

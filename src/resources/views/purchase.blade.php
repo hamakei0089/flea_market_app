@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('checkout' , ['item' => $item->id]) }}" method="post">
-@csrf
+
 <div class="container">
     <div class="left-content">
         <div class="item-info">
@@ -56,5 +55,5 @@
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script src="{{ asset('js/payment.js') }}"></script>
+<script src="{{ asset('js/purchase.js') }}"></script>
 @endsection

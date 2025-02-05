@@ -102,3 +102,38 @@
     font-size: 0.9rem;
     color: #666;
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .register-content {
+        padding: 30px 20px;
+    }
+
+    .form {
+        width: 80%;
+    }
+
+    .register-title  {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-size: 1rem;
+    }
+
+    .form-input input {
+        height: 40px;
+    }
+
+    .form-submit {
+        font-size: 1.1rem;
+        height: 55px;
+    }
+
+    .login-link {
+        font-size: 1rem;
+    }
+}

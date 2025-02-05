@@ -123,7 +123,6 @@
 
 }
 
-/* 送信ボタン */
 .submit-btn {
 
     width: 100%;
@@ -144,7 +143,6 @@
     background-color: #218838;
 }
 
-/* エラーメッセージ */
 .error-alert {
     margin-top: 20px;
     padding: 15px;
@@ -162,4 +160,66 @@
 
 .error-alert-list li {
     margin-bottom: 5px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .form-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .listing-heading {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .form-subheading {
+        font-size: 18px;
+    }
+
+    .form-heading {
+        font-size: 20px;
+    }
+
+    .form-label {
+        margin-top: 3%;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        font-size: 14px;
+    }
+
+    .category-btn {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+
+    .file-upload-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .submit-btn {
+        padding: 10px 20px;
+    }
+
+    .file-upload-section {
+        height: 80px;
+    }
+
+    .category-section,
+    .condition-section {
+        margin-top: 20px;
+    }
+
+    .error-alert {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .error-alert-list li {
+        margin-bottom: 3px;
+    }
 }
