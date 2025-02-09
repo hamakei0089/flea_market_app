@@ -25,7 +25,7 @@
     <div class="tab-content">
         @if ($viewTypes === 'all')
         <div class="items-grid">
-            @foreach ($Items as $item)
+            @foreach ($items as $item)
             <div class="item-card">
                 <div class="item-thumbnail">
                     <a href="{{ route('item.detail', ['item' => $item->id, 'search' => request()->query('search', '')]) }}">

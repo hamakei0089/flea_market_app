@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 @endsection
 
 @section('content')
-
 <div class="item-detail">
     <div class="item-image">
         <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->name }}" />
@@ -20,20 +19,33 @@
         </p>
         <div class="item-actions" data-item-id="{{ $item->id }}">
             <table class="item-stats">
-                    <tr>
-                        <td class="stats-symbol">
-                            <button class="favorite-btn" data-item-id="{{ $item->id }}" data-favorite="{{ $isFavorited ? 'true' : 'false' }}">
-                                {!! $isFavorited ? '★' : '☆' !!}
-                            </button>
-                        </td>
-                        <td class="stats-symbol">💬</td>
-                    </tr>
-                    <tr>
-                        <td class="stats-number">
-                            <span class="favorites-count">{{ $item->favorites_count }}</span>
-                        </td>
-                        <td class="stats-number">{{ $item->comments_count }}</td>
-                    </tr>
+                <tr>
+                    <td class="stats-symbol">
+                        @auth
+                            @if(!$item->isFavoritedBy(auth()->user()))
+                                <form action="{{ route('favorite.store', ['item' => $item->id]) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="favorite-btn">☆</button>
+                                </form>
+                            @else
+                                <form action="{{ route('favorite.destroy', ['item' => $item->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="favorite-btn">★</button>
+                                </form>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="favorite-btn">☆</a>
+                        @endauth
+                    </td>
+                    <td class="stats-symbol">💬</td>
+                </tr>
+                <tr>
+                    <td class="stats-number">
+                        <span class="favorites-count">{{ $item->favorites_count }}</span>
+                    </td>
+                    <td class="stats-number">{{ $item->comments_count }}</td>
+                </tr>
             </table>
         </div>
         <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
@@ -62,28 +74,24 @@
         <div class="comments-list">
             @foreach($item->comments as $comment)
                 <div class="comment-item">
-                    <img class="comment-user-thumbnail" src="{{ $comment->user->thumbnail ? asset('storage/' . $comment->user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $comment->user->name }}" />
-
+                    <img class="comment-user-thumbnail"
+                        src="{{ $comment->user->thumbnail ? asset('storage/' . $comment->user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $comment->user->name }}" />
                     <p class="comment-user-name">{{ $comment->user->name }}</p>
                 </div>
-                    <p class="comment-text">{{ $comment->comment }}</p>
+                <p class="comment-text">{{ $comment->comment }}</p>
             @endforeach
         </div>
         <form class="form-comment" action="{{ route('comment.store', ['item'=> $item->id]) }}" method="post">
             @csrf
             <div class="comment-form">
                 <p class="comment-title">商品へのコメント</p>
-                    <textarea class="input-comment" name="comment" placeholder="ここにコメントを入力してください">{{ old('comment') }}</textarea>
-                        @error('comment')
-                            <p class="error-message">{{ $message }}</p>
-                        @enderror
+                <textarea class="input-comment" name="comment" placeholder="ここにコメントを入力してください">{{ old('comment') }}</textarea>
+                @error('comment')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
                 <button type="submit" class="comment-btn">コメントを送信する</button>
             </div>
         </form>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/favorite.js') }}"></script>
-
 @endsection

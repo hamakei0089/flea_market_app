@@ -50,7 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sell', [SellController::class, 'index'])->name('listing.form');
     Route::post('/sell', [SellController::class, 'store'])->name('listing.store');
 
-    Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('item.favorite');
+    Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('favorite.store');
+    Route::delete('/items/{item}/favorite', [ItemController::class, 'destroy'])->name('favorite.destroy');
 
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->name('purchase.form');
     Route::get('/purchase/address/{item}', [PurchaseController::class, 'editAddress'])->name('edit.address');

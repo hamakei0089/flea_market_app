@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -63,11 +64,14 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     }
 
-    public function favorites()
+    public function favorites(): BelongsToMany
     {
+        return $this->belongsToMany(Item::class, 'favorites');
+    }
 
-    return $this->hasMany(Favorite::class);
-
+    public function favoriteItems()
+    {
+        return $this->belongsToMany(Item::class, 'favorites')->withTimestamps();
     }
 
     public function purchases()

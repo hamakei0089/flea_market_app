@@ -14,13 +14,18 @@ class Favorite extends Model
         'user_id',
     ];
 
-    public function user()
+    public function favoritedBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    public function isFavoritedBy(User $user)
+    {
+        return $this->favoritedBy()->where('user_id', $user->id)->exists();
     }
 
     public function item()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class, 'item_id');
     }
 }

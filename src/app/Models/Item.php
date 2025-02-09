@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Item extends Model
 {
@@ -48,9 +49,14 @@ class Item extends Model
 
     }
 
-    public function favoritedBy()
+    public function favoritedBy(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id');
+    }
+
+    public function isFavoritedBy(User $user)
+    {
+        return $this->favoritedBy()->where('user_id', $user->id)->exists();
     }
 
     public function condition()
