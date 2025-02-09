@@ -55,7 +55,7 @@
         <table class="item-details-table">
             <tr>
                 <th class="detail-title">カテゴリ</th>
-                <td class="detail-values">
+                <td class="category">
                     @foreach($item->categories as $category)
                         <span class="category-name">{{ $category->name }}</span>
                     @endforeach
@@ -63,7 +63,7 @@
             </tr>
             <tr>
                 <th class="detail-title">商品の状態</th>
-                <td class="detail-values">
+                <td class="condition">
                     <span class="condition-name">{{ $item->condition->name }}</span>
                 </td>
             </tr>
