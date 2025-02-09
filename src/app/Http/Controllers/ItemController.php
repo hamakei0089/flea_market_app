@@ -48,7 +48,10 @@ class ItemController extends Controller
 
         $isFavorited = $item->favoritedBy->contains('user_id', auth()->id());
         }
-        return view('detail', compact('item', 'isFavorited'));
+
+        $search = '';
+
+        return view('detail', compact('item', 'isFavorited' , 'search'));
     }
 
     public function like(Item $item){

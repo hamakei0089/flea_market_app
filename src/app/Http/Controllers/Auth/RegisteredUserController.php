@@ -40,8 +40,9 @@ class RegisteredUserController extends Controller
     public function showProfileForm(Request $request)
     {
         $user = auth()->user();
+        $search = '';
 
-        return view('auth.profile' , ['user' => $user]);
+        return view('auth.profile' , ['user' => $user] , compact('search'));
     }
 
 

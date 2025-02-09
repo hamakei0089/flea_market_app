@@ -1,8 +1,5 @@
-.tabs-container {
-    margin-top: 20px;
-}
-
 .tab {
+    margin-top: 20px;
     border-bottom: 2px solid black;
     width: 100%;
 }
@@ -21,14 +18,14 @@
     padding: 5px 15px;
 }
 
-.tab-item a {
-    text-decoration: none;
-    color: #333;
-}
-
-.tab-item.active a {
+.tab-item.active .tab-title {
     font-weight: bold;
     color: #ff5555;
+}
+
+.tab-title {
+    text-decoration: none;
+    color: #333;
 }
 
 .items-grid {

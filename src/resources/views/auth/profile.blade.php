@@ -1,4 +1,4 @@
-@extends('layouts.app_auth')
+@extends('layouts.app')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
@@ -15,7 +15,7 @@
     <div class="form-group">
       <input type="file" id="thumbnail" name="thumbnail" style="display: none;">
       <span id="file-name" style="display: none; margin-top: 10px;"></span>
-      <img id="thumbnail-preview">
+      <img id="thumbnail-preview" src="{{ $user->thumbnail ? asset('storage/' . $user->thumbnail) : asset('storage/profiles/default-thumbnail.png')}}" alt="{{ $user->name }}" />
       <label for="thumbnail">
       <button type="button">画像を選択する</button>
       </label>

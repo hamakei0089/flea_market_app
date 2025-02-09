@@ -19,15 +19,16 @@
 </div>
 
 <div class="tabs-container">
-    <ul class="tabs-menu">
-        <li class="tab-item {{ $viewTypes === 'sell' ? 'active' : '' }}">
-            <a href="{{ route('mypage.index' , ['page' => 'sell']) }}">出品した商品</a>
-        </li>
-        <li class="tab-item {{ $viewTypes === 'buy' ? 'active' : '' }}">
-            <a href="{{ route('mypage.index', ['page' => 'buy']) }}">購入した商品</a>
-        </li>
-    </ul>
-    <div class="tab-underline"></div>
+    <div class="tab">
+        <ul class="tabs-menu">
+            <li class="tab-item {{ $viewTypes === 'sell' ? 'active' : '' }}">
+                <a class="tab-title" href="{{ route('mypage.index' , ['page' => 'sell']) }}">出品した商品</a>
+            </li>
+            <li class="tab-item {{ $viewTypes === 'buy' ? 'active' : '' }}">
+                <a class="tab-title" href="{{ route('mypage.index', ['page' => 'buy']) }}">購入した商品</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="tab-content">
         @if ($viewTypes === 'sell')

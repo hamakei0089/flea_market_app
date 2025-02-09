@@ -14,8 +14,9 @@ class SellController extends Controller
     {
         $categories = Category::all();
         $conditions = Condition::all();
+        $search = '';
 
-        return view ('listing' , compact('categories' ,'conditions'));
+        return view ('listing' , compact('categories' , 'conditions' , 'search'));
     }
 
     public function store(Request $request)

@@ -14,10 +14,10 @@
     <div class="tab">
         <ul class="tabs-menu">
             <li class="tab-item {{ $viewTypes === 'all' ? 'active' : '' }}">
-                <a href="{{ route('items.index', ['search' => $search]) }}">おすすめ</a>
+                <a class="tab-title" href="{{ route('items.index', ['search' => $search]) }}">おすすめ</a>
             </li>
             <li class="tab-item {{ $viewTypes === 'mylist' ? 'active' : '' }}">
-                <a href="{{ route('items.index', ['page' => 'mylist', 'search' => $search]) }}">マイリスト</a>
+                <a class="tab-title" href="{{ route('items.index', ['page' => 'mylist', 'search' => $search]) }}">マイリスト</a>
             </li>
         </ul>
     </div>

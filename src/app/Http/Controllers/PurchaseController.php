@@ -14,15 +14,17 @@ class PurchaseController extends Controller
     {
 
         $user = auth()->user();
+        $search = '';
 
-        return view('purchase' , compact('item' , 'user'));
+        return view('purchase' , compact('item' , 'user' , 'search'));
     }
 
     public function editAddress(Item $item)
     {
         $user = auth()->user();
+        $search = '';
 
-        return view('edit-address' , compact('user' , 'item'));
+        return view('edit-address' , compact('user' , 'item', 'search'));
     }
 
     public function updateAddress(Request $request , Item $item)
