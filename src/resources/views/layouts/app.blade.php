@@ -23,7 +23,7 @@
       <nav class="header-items">
         <ul class="header-nav">
           <li class="header-nav-search">
-            <input type="text" id="search-box" class="search-box" placeholder="なにをお探しですか？" value="{{ request()->query('search', '') }}">
+            <input type="text" id="search-box" class="search-box" placeholder="なにをお探しですか？" value="{{ $search }}">
           </li>
           <li class="header-nav-btn">
             @auth

@@ -1,34 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const searchBox = document.getElementById('search-box');
-    const itemsGrid = document.querySelector('.items-grid');
-    const itemCards = itemsGrid.querySelectorAll('.item-card');
+$(document).ready(function () {
+    $('#search-box').keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            let searchQuery = $(this).val();
+            let currentTab = $('.tabs-menu .active a').attr('href');
 
-    function getSearchParam() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('search') || '';
-    }
+            let url = new URL(currentTab, window.location.origin);
+            url.searchParams.set('search', searchQuery);
 
-    searchBox.value = getSearchParam();
-
-    searchBox.addEventListener('input', (e) => {
-        const searchText = e.target.value.toLowerCase();
-
-        const urlParams = new URLSearchParams(window.location.search);
-        urlParams.set('search', searchText);
-
-        if (!urlParams.has('page')) {
-            urlParams.set('page', 'all');
+            window.location.href = url.toString();
         }
-
-        window.history.replaceState(null, '', '?' + urlParams.toString());
-
-        itemCards.forEach((card) => {
-            const itemName = card.querySelector('.item-name').textContent.toLowerCase();
-            if (itemName.includes(searchText)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
     });
 });

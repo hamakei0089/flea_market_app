@@ -11,20 +11,30 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Item::all();
-        $viewTypes = $request ->get('page' , 'all' );
+        $search = $request->query('search', '');
+        $viewTypes = $request->query('page', 'all');
+
+        $itemsQuery = Item::query();
+        if (!empty($search)) {
+            $itemsQuery->where('name', 'like', "%{$search}%");
+        }
+        $items = $itemsQuery->get();
 
         $user = auth()->user();
         $myLists = [];
 
-        if($user){
+        if ($user) {
+            $myListsQuery = Favorite::where('user_id', auth()->id())->with('item');
+            if (!empty($search)) {
 
-        $myLists = Favorite::where('user_id', auth()->id())->with('item')->get();
-
-
+                $myListsQuery->whereHas('item', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
+            }
+            $myLists = $myListsQuery->get();
         }
 
-        return view('index' , compact('items' , 'viewTypes' , 'user', 'myLists'));
+        return view('index', compact('items', 'viewTypes', 'user', 'myLists', 'search'));
     }
 
     public function show($id)
