@@ -44,9 +44,9 @@ https://github.com/hamakei0089/flea_market_app.git
 
 ## 使用技術（実行環境）
 
-PHP 8.3.0　　
+PHP 8.3.16　　
 
-Laravel Framework 8.83.27　　
+Laravel Framework  10.48.23　　
 
 MySQL8.1　　
 

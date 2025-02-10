@@ -57,6 +57,6 @@ services:
     networks:
       - mail_network
 
-  networks:
-    mail_network:
-      driver: bridge
+networks:
+  mail_network:
+    driver: bridge
