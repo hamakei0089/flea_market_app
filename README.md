@@ -71,11 +71,15 @@ Laravel環境構築　　
 
 2. composer install　　
 
-3. composer require laravel/fortify
+3. composer require laravel/fortify　　
 
-4. 「.env.example」ファイルを「.env」ファイルに命名を変更　　
+4. 支払い機能にstripeを使用するため、以下のコマンドを入力
 
-5. .envに以下の環境変数を変更　　
+composer require stripe/stripe-php　　
+
+5. 「.env.example」ファイルを「.env」ファイルに命名を変更　　
+
+6. .envに以下の環境変数を変更　　
 
 APP_NAME=coachtech_flea_ma_app　　
 
@@ -97,19 +101,19 @@ STRIPE_PUBLIC=your_stripe_public_key　　
 
 STRIPE_SECRET=your_stripe_secret_key　　
 
-6. アプリケーションキーの作成　　
+7. アプリケーションキーの作成　　
 
 php artisan key:generate　　
 
-7. マイグレーションの実行　　
+8. マイグレーションの実行　　
 
 php artisan migrate　　
 
-8. シンボリックリンクの作成
+9. シンボリックリンクの作成
 
 php artisan storage:link　　
 
-9. ダミーデータのシーディング　　
+10. ダミーデータのシーディング　　
 
 開発環境で使用するための商品データをデータベースに投入　　
 
