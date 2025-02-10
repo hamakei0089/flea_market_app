@@ -59,7 +59,7 @@ MySQL8.1　　
 
 Dockerビルド
 
-1. git clone git@github.com:hamakei0089/advanced-case.git　　
+1. git clone git@github.com:hamakei0089/flea_market_app.git　　
 
 2. DockerDesktopを立ち上げる　　
 
