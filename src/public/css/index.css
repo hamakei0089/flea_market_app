@@ -56,6 +56,15 @@
     color: #333;
 }
 
+.sold-label {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
 .profile-info {
     display: flex;
     align-items: center;

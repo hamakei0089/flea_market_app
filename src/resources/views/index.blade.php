@@ -32,7 +32,11 @@
                     <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->name }}">
                     </a>
                 </div>
-                <p class="item-name">{{ $item->name }}</p>
+                <p class="item-name">{{ $item->name }}
+                @if($item->is_purchased)
+                <span class="sold-label">Sold</span>
+                @endif
+                </p>
             </div>
             @endforeach
         </div>
@@ -46,7 +50,11 @@
                     <img src="{{ asset('storage/' . $favorite->item->thumbnail) }}" alt="{{ $favorite->item->name }}">
                     </a>
                 </div>
-                <p class="item-name">{{ $favorite->item->name }}</p>
+                <p class="item-name">{{ $favorite->item->name }}
+                @if($favorite->item->is_purchased)
+                <span class="sold-label">Sold</span>
+                @endif
+                </p>
             </div>
             @endforeach
         </div>

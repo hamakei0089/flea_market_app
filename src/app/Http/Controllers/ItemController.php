@@ -18,6 +18,15 @@ class ItemController extends Controller
         if (!empty($search)) {
             $itemsQuery->where('name', 'like', "%{$search}%");
         }
+
+        $user = auth()->user();
+        if($user){
+            $itemsQuery->where(function ($query) use ($user) {
+        $query->where('user_id', '!=', $user->id)
+              ->orWhereNull('user_id');
+        });
+        }
+
         $items = $itemsQuery->get();
 
         $user = auth()->user();
@@ -36,6 +45,8 @@ class ItemController extends Controller
 
         return view('index', compact('items', 'viewTypes', 'user', 'myLists', 'search'));
     }
+
+
 
     public function show($id)
     {
