@@ -48,8 +48,12 @@
                 </tr>
             </table>
         </div>
-
-        <button type="submit" class="purchase-btn">購入する</button>
+        <form action="{{ route('purchase.checkout' , ['item'  => $item->id]) }}" method="post">
+        @csrf
+            <input type="hidden" name="item-name" value="{{ $item->name }}">
+            <input type="hidden" name="item-price" value="{{ $item->price }}">
+            <button type="submit" class="purchase-btn">購入する</button>
+        </form>
     </div>
 </div>
 </form>

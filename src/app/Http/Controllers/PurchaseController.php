@@ -48,41 +48,48 @@ class PurchaseController extends Controller
     return redirect()->route('purchase.form', ['item' => $item->id])->with('success' , '住所を変更しました。');
     }
 
-    public function payment(Request $request, Item $item)
+    public function checkout(Item $item)
+    {
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+        session(['purchased_item_id' => $item->id]);
+
+        $checkout_session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price * 100,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('purchase.success' , ['item' => $item->id]),
+            'cancel_url' => route('purchase.cancel'),
+        ]);
+
+        return redirect($checkout_session->url);
+    }
+
+    public function success(Item $item)
     {
 
-        $user = auth()->user();
+        $itemId = session('purchased_item_id');
 
-        $paymentMethod = $request->input('payment_method');
+        $item = Item::findOrFail($itemId);
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $item -> update([
+        'is_purchased'=> 1,
+    ]);
 
-        $lineItems = [[
-            'price_data' => [
-                'currency' => 'jpy',
-                'product_data' => [
-                    'name' => $item->name,
-                ],
-                'unit_amount' => $item->price * 100,
-            ],
-            'quantity' => 1,
-        ]];
+    return view('success', compact('item'));
+    }
 
-        // Stripeの決済セッションを作成
-        try {
-            $session = Session::create([
-                'payment_method_types' => $paymentMethod === 'カード支払い' ? ['card'] : ['convenience'],
-                'line_items' => $lineItems,
-                'mode' => 'payment',
-                'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => route('checkout.cancel'),
-            ]);
-
-            return redirect()->away($session->url);
-        } catch (\Exception $e) {
-
-            return back()->withErrors('支払い処理に失敗しました。');
-        }
+    public function cancel()
+    {
+        return view('cancel');
     }
 }
-

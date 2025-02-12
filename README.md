@@ -77,6 +77,14 @@ Laravel環境構築　　
 
 composer require stripe/stripe-php　　
 
+config/service.phpに以下を追加　　
+
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+        'public' => env('STRIPE_PUBLIC'),
+    ],
+
+
 5. 「.env.example」ファイルを「.env」ファイルに命名を変更　　
 
 6. .envに以下の環境変数を変更　　
