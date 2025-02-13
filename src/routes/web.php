@@ -58,6 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('update.address');
     Route::post('/purchase/{item}/checkout', [PurchaseController::class, 'checkout'])->name('purchase.checkout');
     Route::get('/purchase/{item}/success', [PurchaseController::class, 'success'])->name('purchase.success');
-    Route::get('/purchase/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
+    Route::get('/purchase/{item}/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
+
 
 });

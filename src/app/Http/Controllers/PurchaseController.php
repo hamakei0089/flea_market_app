@@ -62,13 +62,13 @@ class PurchaseController extends Controller
                     'product_data' => [
                         'name' => $item->name,
                     ],
-                    'unit_amount' => $item->price * 100,
+                    'unit_amount' => $item->price,
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
             'success_url' => route('purchase.success' , ['item' => $item->id]),
-            'cancel_url' => route('purchase.cancel'),
+            'cancel_url' => route('purchase.cancel' , ['item' => $item->id]),
         ]);
 
         return redirect($checkout_session->url);
@@ -88,8 +88,12 @@ class PurchaseController extends Controller
     return view('success', compact('item'));
     }
 
-    public function cancel()
+    public function cancel(Item $item)
     {
-        return view('cancel');
+        $itemId = session('purchased_item_id');
+
+        $item = Item::findOrFail($itemId);
+
+        return view('cancel' , compact('item'));
     }
 }

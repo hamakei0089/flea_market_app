@@ -10,41 +10,46 @@ use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     public function index(Request $request)
-    {
-        $search = $request->query('search', '');
-        $viewTypes = $request->query('page', 'all');
+{
+    $search = $request->query('search', '');
+    $viewTypes = $request->query('page', 'all');
 
-        $itemsQuery = Item::query();
-        if (!empty($search)) {
-            $itemsQuery->where('name', 'like', "%{$search}%");
-        }
-
-        $user = auth()->user();
-        if($user){
-            $itemsQuery->where(function ($query) use ($user) {
-        $query->where('user_id', '!=', $user->id)
-              ->orWhereNull('user_id');
-        });
-        }
-
-        $items = $itemsQuery->get();
-
-        $user = auth()->user();
-        $myLists = [];
-
-        if ($user) {
-            $myListsQuery = Favorite::where('user_id', auth()->id())->with('item');
-            if (!empty($search)) {
-
-                $myListsQuery->whereHas('item', function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%");
-                });
-            }
-            $myLists = $myListsQuery->get();
-        }
-
-        return view('index', compact('items', 'viewTypes', 'user', 'myLists', 'search'));
+    $itemsQuery = Item::query();
+    if (!empty($search)) {
+        $itemsQuery->where('name', 'like', "%{$search}%");
     }
+
+    $user = auth()->user();
+
+    if ($user) {
+        $itemsQuery->where(function ($query) use ($user) {
+            $query->where('user_id', '!=', $user->id)
+                  ->orWhereNull('user_id');
+        });
+    }
+
+    $items = $itemsQuery->get();
+
+    $myLists = [];
+
+    if ($user) {
+        $myListsQuery = Favorite::where('user_id', $user->id)
+            ->whereHas('item', function ($query) use ($search) {
+                if (!empty($search)) {
+                    $query->where('name', 'like', "%{$search}%");
+                }
+            })
+            ->with(['item' => function ($query) use ($user) {
+                $query->where('user_id', '!=', $user->id)
+                      ->orWhereNull('user_id');
+            }]);
+
+        $myLists = $myListsQuery->get();
+    }
+
+    return view('index', compact('items', 'viewTypes', 'user', 'myLists', 'search'));
+}
+
 
 
 

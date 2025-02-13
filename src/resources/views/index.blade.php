@@ -44,18 +44,20 @@
         @auth
         <div class="items-grid">
             @foreach ($myLists as $favorite)
-            <div class="item-card">
-                <div class="item-thumbnail">
-                    <a href="{{ route('item.detail', ['item' => $favorite->item->id]) }}">
-                    <img src="{{ asset('storage/' . $favorite->item->thumbnail) }}" alt="{{ $favorite->item->name }}">
-                    </a>
+                @if ($favorite->item)
+                <div class="item-card">
+                    <div class="item-thumbnail">
+                        <a href="{{ route('item.detail', ['item' => $favorite->item->id]) }}">
+                        <img src="{{ asset('storage/' . $favorite->item->thumbnail) }}" alt="{{ $favorite->item->name }}">
+                        </a>
+                    </div>
+                    <p class="item-name">{{ $favorite->item->name }}
+                    @if($favorite->item->is_purchased)
+                    <span class="sold-label">Sold</span>
+                    @endif
+                    </p>
                 </div>
-                <p class="item-name">{{ $favorite->item->name }}
-                @if($favorite->item->is_purchased)
-                <span class="sold-label">Sold</span>
                 @endif
-                </p>
-            </div>
             @endforeach
         </div>
         @endauth

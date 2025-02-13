@@ -247,6 +247,10 @@
     box-sizing: border-box;
 }
 
+.error-message{
+    color: red;
+}
+
 .comment-btn {
     width: 100%;
     padding: 10px 20px;
