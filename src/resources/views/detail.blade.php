@@ -48,7 +48,11 @@
                 </tr>
             </table>
         </div>
-        <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
+        @if($item->is_purchased)
+            <p class="sold-out">この商品は売り切れました</p>
+        @else
+            <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
+        @endif
         <h2 class="section-title">商品説明</h2>
         <p class="item-description">{{ $item->description }}</p>
         <h2 class="section-title">商品の情報</h2>
