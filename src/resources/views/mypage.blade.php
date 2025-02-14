@@ -7,7 +7,7 @@
 @section('content')
 
 @if(session('success'))
-    <p class="registration__success">{{ session('success') }}</p>
+    <p class="registration-success">{{ session('success') }}</p>
 @endif
 
 <div class="profile-info">
@@ -50,7 +50,9 @@
             @foreach ($buyItems as $buyItem)
             <div class="item-card">
                 <div class="item-thumbnail">
+                    <a href="{{ route('item.detail', ['item' => $buyItem->id]) }}">
                     <img src="{{ asset('storage/' . $buyItem->item->thumbnail) }}" alt="{{ $buyItem->item->name }}">
+                    </a>
                 </div>
                 <p class="item-name">{{ $buyItem->item->name }}</p>
             </div>

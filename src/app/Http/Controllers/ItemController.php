@@ -14,7 +14,7 @@ class ItemController extends Controller
     $search = $request->query('search', '');
     $viewTypes = $request->query('page', 'all');
 
-    $itemsQuery = Item::query();
+    $itemsQuery = Item::with('purchase');
     if (!empty($search)) {
         $itemsQuery->where('name', 'like', "%{$search}%");
     }
@@ -41,7 +41,8 @@ class ItemController extends Controller
             })
             ->with(['item' => function ($query) use ($user) {
                 $query->where('user_id', '!=', $user->id)
-                      ->orWhereNull('user_id');
+                      ->orWhereNull('user_id')
+                      ->with('purchase');
             }]);
 
         $myLists = $myListsQuery->get();

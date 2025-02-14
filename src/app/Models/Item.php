@@ -66,11 +66,11 @@ class Item extends Model
 
     }
 
-    public function purchases()
+    public function purchase()
 
     {
 
-    return $this->hasMany(Purchase::class);
+    return $this->hasOne(Purchase::class);
 
     }
 

@@ -48,7 +48,7 @@
                 </tr>
             </table>
         </div>
-        @if($item->is_purchased)
+        @if($item->purchase)
             <p class="sold-out">この商品は売り切れました</p>
         @else
             <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>

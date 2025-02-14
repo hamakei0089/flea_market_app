@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -79,13 +81,12 @@ class PurchaseController extends Controller
 
         $itemId = session('purchased_item_id');
 
-        $item = Item::findOrFail($itemId);
-
-        $item -> update([
-        'is_purchased'=> 1,
+        $purchase = Purchase::create([
+        'user_id'=> Auth::id(),
+        'item_id'=> $itemId,
     ]);
 
-    return view('success', compact('item'));
+    return view('success', compact('purchase'));
     }
 
     public function cancel(Item $item)

@@ -33,7 +33,7 @@
                     </a>
                 </div>
                 <p class="item-name">{{ $item->name }}
-                @if($item->is_purchased)
+                @if($item->purchase)
                 <span class="sold-label">Sold</span>
                 @endif
                 </p>
@@ -52,7 +52,7 @@
                         </a>
                     </div>
                     <p class="item-name">{{ $favorite->item->name }}
-                    @if($favorite->item->is_purchased)
+                    @if($favorite->item->purchase)
                     <span class="sold-label">Sold</span>
                     @endif
                     </p>

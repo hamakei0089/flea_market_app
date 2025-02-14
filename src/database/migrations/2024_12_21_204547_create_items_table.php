@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('brand_name')->nullable();
             $table->unsignedInteger('price');
             $table->text('description')->nullable();
-            $table->boolean('is_purchased')->default(false);
             $table->string('thumbnail')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('condition_id');
