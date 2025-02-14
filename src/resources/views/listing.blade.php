@@ -18,9 +18,10 @@
             </label>
             <span id="file-name" style="display: none; margin-top: 10px;"></span>
         </div>
-        <div class="form-details-section">
-            <h2 class="form-heading">商品の詳細</h2>
 
+        <div class="form-details-section">
+
+            <h2 class="form-heading">商品の詳細</h2>
                 <label class="form-label" for='category'>カテゴリー</label><br>
                     @foreach ($categories as $category)
                     <button type="button" class="category-btn" data-category-id="{{ $category->id }}"> {{ $category->name }}
