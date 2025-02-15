@@ -125,12 +125,7 @@ php artisan storage:link　　
 
 開発環境で使用するための商品データをデータベースに投入　　
 
-php artisan db:seed --class=CategoriesTableSeeder　　
-
-php artisan db:seed --class=ConditionsTableSeeder　　
-
-php artisan db:seed --class=ItemsTableSeeder　　
-
+php artisan db:seed
 
 # coachtechフリマ
 
