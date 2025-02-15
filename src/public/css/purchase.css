@@ -66,6 +66,10 @@
     margin: 0 0 40px 50px;
 }
 
+.form-error{
+    color: red;
+}
+
 .address-section {
     display: flex;
     flex-direction: column;

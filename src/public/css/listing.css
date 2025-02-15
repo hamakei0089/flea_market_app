@@ -37,6 +37,9 @@
     top: 50%;
     transform: translateY(-50%)
 }
+.form-error {
+    color: red;
+}
 
 .listing-form {
     display: flex;

@@ -23,14 +23,20 @@
                 <option value="convenience">コンビニ支払い</option>
                 <option value="card">カード支払い</option>
             </select>
+            <div class="form-error">
+                @error('payment_method')
+                {{ $message }}
+                @enderror
+            </div>
         </div>
+
 
         <div class="address-section">
             <div class="address-header">
                 <h2 class="address-title">配送先</h2>
                 <a class="address-edit-link" href="{{ route('edit.address', ['item' => $item->id]) }}">変更する</a>
             </div>
-            <p class="address-post-code">〒{{ substr($user->post_code, 0, 3) }}-{{ substr($user->post_code, 3) }}</p>
+            <p class="address-post-code">〒{{ ($user->post_code) }}</p>
             <p class="address-text">{{ $user->address }}  {{ $user->building }}</p>
         </div>
     </div>
@@ -47,6 +53,7 @@
                     <td class="summary-payment-method" id="payment-method-display">{{ old('payment_method', '選択されていません') }}</td>
                 </tr>
             </table>
+            
         </div>
         <form action="{{ route('purchase.checkout' , ['item'  => $item->id]) }}" method="post">
         @csrf

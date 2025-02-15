@@ -18,6 +18,11 @@
             </label>
             <span id="file-name" style="display: none; margin-top: 10px;"></span>
         </div>
+        <div class="form-error">
+            @error('thumbnail')
+            {{ $message }}
+            @enderror
+        </div>
 
         <div class="form-details-section">
 
@@ -28,6 +33,11 @@
                     </button>
                     <input type="hidden" name="categories[]" value="{{ $category->id }}" disabled>
                     @endforeach
+                    <div class="form-error">
+                        @error('category')
+                        {{ $message }}
+                        @enderror
+                    </div>
 
             <div class="condition-section">
                 <label class="form-label" for="condition">商品の状態</label>
@@ -39,34 +49,45 @@
                         </option>
                     @endforeach
                 </select>
+                <div class="form-error">
+                    @error('condition')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
 
             <h3 class="form-heading">商品名と説明</h3>
             <label class="form-label" for="name">商品名</label>
             <input class="form-input" type="text" id="name" name="name" value="{{ old('name') }}">
+            <div class="form-error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </div>
 
             <label class="form-label" for="brand-name">ブランド名</label>
             <input class="form-input" type="text" id="brand-name" name="brand_name" value="{{ old('brand_name') }}">
 
             <label class="form-label" for="description">商品の説明</label>
             <textarea class="form-textarea" id="description" name="description" rows="10">{{ old('description') }}</textarea>
+            <div class="form-error">
+                @error('description')
+                {{ $message }}
+                @enderror
+            </div>
+
 
             <label class="form-label" for="price">販売価格</label>
             <input class="form-input" type="number" id="price" name="price" placeholder="￥" value="{{ old('price') }}">
+            <div class="form-error">
+                @error('price')
+                {{ $message }}
+                @enderror
+            </div>
 
             <button class="submit-btn" type="submit">出品する</button>
         </div>
     </form>
-
-    @if ($errors->any())
-        <div class="error-alert">
-            <ul class="error-alert-list">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

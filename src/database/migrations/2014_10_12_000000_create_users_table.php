@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_profile_complete')->default(false);
-            $table->unsignedInteger('post_code')->nullable();
+            $table->string('post_code')->nullable();
             $table->string('address')->nullable();
             $table->string('building')->nullable();
             $table->string('thumbnail')->nullable();

@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\SellController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\PurchaseController;
@@ -47,8 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/items/{item}/comment', [CommentController::class, 'store'])->name('comment.store');
 
-    Route::get('/sell', [SellController::class, 'index'])->name('listing.form');
-    Route::post('/sell', [SellController::class, 'store'])->name('listing.store');
+    Route::get('/sell', [ListingController::class, 'index'])->name('listing.form');
+    Route::post('/sell', [ListingController::class, 'store'])->name('listing.store');
 
     Route::post('/items/{item}/favorite', [ItemController::class, 'like'])->name('favorite.store');
     Route::delete('/items/{item}/favorite', [ItemController::class, 'destroy'])->name('favorite.destroy');

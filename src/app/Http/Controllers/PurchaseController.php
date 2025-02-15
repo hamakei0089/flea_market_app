@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Purchase;
+use App\Http\Requests\DestinationRequest;
+use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
@@ -29,15 +31,8 @@ class PurchaseController extends Controller
         return view('edit-address' , compact('user' , 'item', 'search'));
     }
 
-    public function updateAddress(Request $request , Item $item)
+    public function updateAddress(DestinationRequest $request , Item $item)
     {
-        $request->validate([
-
-        'post_code' => 'required',
-        'address' => 'required',
-        'building' => 'nullable|string|max:255',
-    ]);
-
         $user = $request->user();
 
         $user -> update([
@@ -50,11 +45,16 @@ class PurchaseController extends Controller
     return redirect()->route('purchase.form', ['item' => $item->id])->with('success' , '住所を変更しました。');
     }
 
-    public function checkout(Item $item)
+    public function checkout(PurchaseRequest $request , Item $item)
     {
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
-        session(['purchased_item_id' => $item->id]);
+
+        dd($request->input('payment_method'));
+        session([
+        'purchased_item_id' => $item->id,
+        'payment_method'    => $request->input('payment_method'),
+        ]);
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -80,10 +80,12 @@ class PurchaseController extends Controller
     {
 
         $itemId = session('purchased_item_id');
+        $paymentMethod = session('payment_method');
 
         $purchase = Purchase::create([
         'user_id'=> Auth::id(),
         'item_id'=> $itemId,
+        'payment_method'=> $paymentMethod,
     ]);
 
     return view('success', compact('purchase'));

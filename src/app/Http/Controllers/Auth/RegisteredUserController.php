@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\AddressRequest;
 use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
@@ -46,17 +47,8 @@ class RegisteredUserController extends Controller
     }
 
 
-    public function updateProfile(Request $request)
+    public function updateProfile(AddressRequest $request)
     {
-        $request->validate([
-
-        'name' => 'required|string|max:255',
-        'post_code' => 'required',
-        'address' => 'required',
-        'building' => 'nullable|string|max:255',
-        'thumbnail' => 'nullable',
-    ]);
-
         $user = $request->user();
 
         if ($request->hasFile('thumbnail')) {
