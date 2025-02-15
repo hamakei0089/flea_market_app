@@ -24,8 +24,6 @@ https://github.com/hamakei0089/flea_market_app.git
 
 ユーザープロフィール情報の編集　　
 
-ユーザー商品出品機能　　
-
 商品一覧取得　　
 
 商品詳細取得　　
@@ -33,6 +31,8 @@ https://github.com/hamakei0089/flea_market_app.git
 商品名検索機能　　
 
 商品購入機能　　
+
+商品出品機能　　
 
 商品へのいいね追加　　
 
