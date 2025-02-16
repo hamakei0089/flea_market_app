@@ -18,10 +18,13 @@
 
         <div class="payment-section">
             <h2 class="payment-title">支払い方法</h2>
-            <select id="payment-method" class="payment-select" name="payment_method" required>
-                <option value="" disabled selected>選択して下さい</option>
-                <option value="convenience">コンビニ支払い</option>
-                <option value="card">カード支払い</option>
+            <select id="payment_method" class="payment-select" name="payment_method" required>
+                <option value="" disabled selected>選択してください</option>
+                        @foreach ($paymentMethods as $paymentMethod)
+                        <option value="{{ $paymentMethod->name }}" {{ old('paymentMethod') == $paymentMethod->name ? 'selected' : '' }}>
+                            {{ $paymentMethod->name }}
+                        </option>
+                        @endforeach
             </select>
             <div class="form-error">
                 @error('payment_method')
@@ -53,17 +56,19 @@
                     <td class="summary-payment-method" id="payment-method-display">{{ old('payment_method', '選択されていません') }}</td>
                 </tr>
             </table>
-            
         </div>
+
         <form action="{{ route('purchase.checkout' , ['item'  => $item->id]) }}" method="post">
         @csrf
-            <input type="hidden" name="item-name" value="{{ $item->name }}">
-            <input type="hidden" name="item-price" value="{{ $item->price }}">
+            <input type="hidden" name="name" value="{{ $item->name }}">
+            <input type="hidden" name="price" value="{{ $item->price }}">
+            <input type="hidden" name="post_code" value="{{ $user->post_code }}">
+            <input type="hidden" name="address" value="{{ $user->address }}">
+            <input type="hidden" name="payment_method" id="hidden-payment-method" value="{{ old('payment_method') }}">
             <button type="submit" class="purchase-btn">購入する</button>
         </form>
     </div>
 </div>
-</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/purchase.js') }}"></script>

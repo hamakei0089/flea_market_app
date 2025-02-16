@@ -15,11 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id');
-            $table->string('payment_method');
+            $table->unsignedBigInteger('payment_method_id')->nullable();
+            $table->string('post_code');
+            $table->string('address');
+            $table->string('building')->nullable();
             $table->timestamps();
 
         $table->foreign('user_id')->references('id')->on('users');
         $table->foreign('item_id')->references('id')->on('items');
+        $table->foreign('payment_method_id')->references('id')->on('payment_methods');
         });
     }
 

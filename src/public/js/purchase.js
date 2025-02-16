@@ -1,16 +1,12 @@
 $(document).ready(function() {
-    $('#payment-method').on('change', function() {
-        var selectedPaymentMethod = $(this).val();
-        var displayText = '';
 
-        if (selectedPaymentMethod === 'convenience') {
-            displayText = 'コンビニ支払い';
-        } else if (selectedPaymentMethod === 'card') {
-            displayText = 'カード支払い';
-        } else {
-            displayText = '選択されていません';
-        }
+    $('#payment_method').on('change', function() {
+        var paymentMethod = $(this).val();
+        $('#payment-method-display').text(paymentMethod);
+    });
 
-        $('#payment-method-display').text(displayText);
+    $('#payment_method').change(function() {
+        var paymentMethod = $(this).val();
+        $('#hidden-payment-method').val(paymentMethod);
     });
 });

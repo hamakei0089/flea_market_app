@@ -151,7 +151,8 @@
 }
 
 .purchase-btn {
-    width: 100%;
+    display: block;
+    width: 20em;
     padding: 10px;
     font-size: 16px;
     color: #fff;
@@ -159,6 +160,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .purchase-btn:hover {
