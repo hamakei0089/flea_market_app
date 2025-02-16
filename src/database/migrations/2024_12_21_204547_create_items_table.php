@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('brand_name')->nullable();
             $table->unsignedInteger('price');
-            $table->text('description')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->text('description');
+            $table->string('thumbnail');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('condition_id');
             $table->timestamps();

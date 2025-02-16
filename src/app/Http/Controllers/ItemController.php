@@ -51,9 +51,6 @@ class ItemController extends Controller
     return view('index', compact('items', 'viewTypes', 'user', 'myLists', 'search'));
 }
 
-
-
-
     public function show($id)
     {
         $item = Item::withCount(['favorites', 'comments'])

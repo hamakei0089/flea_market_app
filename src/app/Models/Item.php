@@ -23,30 +23,22 @@ class Item extends Model
 
     public function user()
     {
-
-    return $this->belongsTo(User::class);
-
+        return $this->belongsTo(User::class);
     }
 
     public function categories()
     {
-
-    return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');
-
+        return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');
     }
 
     public function comments()
     {
-
-    return $this->hasMany(Comment::class);
-
+        return $this->hasMany(Comment::class);
     }
 
     public function favorites()
     {
-
-    return $this->hasMany(Favorite::class);
-
+        return $this->hasMany(Favorite::class);
     }
 
     public function favoritedBy(): BelongsToMany
@@ -61,17 +53,12 @@ class Item extends Model
 
     public function condition()
     {
-
-    return $this->belongsTo(Condition::class);
-
+        return $this->belongsTo(Condition::class);
     }
 
     public function purchase()
-
     {
-
-    return $this->hasOne(Purchase::class);
-
+        return $this->hasOne(Purchase::class);
     }
 
 

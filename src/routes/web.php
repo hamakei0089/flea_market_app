@@ -20,6 +20,7 @@ use App\Http\Controllers\PurchaseController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/*商品一覧*/
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.detail');
 
@@ -38,7 +39,7 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
     ->middleware(['auth', 'signed'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->middleware('auth')->name('verification.resend');
 
-/*user*/
+/*認証userのみ*/
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 

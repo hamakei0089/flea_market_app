@@ -28,4 +28,9 @@ class Purchase extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function payment_methods()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
 }
