@@ -30,8 +30,15 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'メールアドレスを入力して下さい。',
-            'password.required' => 'パスワードを入力して下さい。',
+            'email.required' => 'メールアドレスを入力してください',
+            'password.required' => 'パスワードを入力してください',
         ];
+    }
+
+    public function failedLoginResponse()
+    {
+        return back()->withErrors([
+            'login' => 'ログイン情報が登録されていません',
+        ])->withInput($this->only('email', 'remember'));
     }
 }

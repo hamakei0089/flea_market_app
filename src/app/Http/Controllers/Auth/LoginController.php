@@ -36,8 +36,6 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-        return back()->withErrors([
-            'login' => 'ログイン情報が登録されていません。',
-        ])->withInput($request->only('email', 'remember'));
+    return $request->failedLoginResponse();
     }
 }
