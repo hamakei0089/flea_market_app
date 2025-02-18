@@ -1,7 +1,4 @@
 <?php
-    /**
-     * A basic feature test example.
-     */
 
 namespace Tests\Feature;
 
@@ -13,6 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class FavoriteTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /** @test */
