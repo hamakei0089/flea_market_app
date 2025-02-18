@@ -14,6 +14,8 @@ class DestinationTest extends TestCase
     /**
      * A basic feature test example.
      */
+
+    use RefreshDatabase;
      /** @test */
     public function user_can_update_address_and_see_changes()
     {
