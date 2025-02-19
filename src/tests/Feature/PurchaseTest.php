@@ -17,7 +17,9 @@ class PurchaseTest extends TestCase
      /** @test */
     public function purchase_is_saved_after_success()
     {
+        Artisan::call('migrate:refresh');
         Artisan::call('db:seed');
+
         $user = User::factory()->create();
         $item = Item::factory()->create();
         $paymentMethod = PaymentMethod::first();

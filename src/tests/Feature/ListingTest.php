@@ -17,15 +17,22 @@ class ListingTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_store_a_new_listing()
+    public function it_can_store_a_new_listing()
     {
         Storage::fake('public');
 
+
+        Artisan::call('migrate:refresh');
         $this->seed(\CategoriesTableSeeder::class);
         $this->seed(\ConditionsTableSeeder::class);
 
 
         $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('listing.form'));
+        $response->assertStatus(200);
+
         $categoryIds = Category::inRandomOrder()->limit(rand(1, 14))->pluck('id')->toArray();
         $condition = Condition::inRandomOrder()->first();
 

@@ -92,6 +92,9 @@ class MylistTest extends TestCase
     public function user_items_are_hidden_from_themselves()
     {
 
+    Artisan::call('migrate:refresh');
+    Artisan::call('db:seed');
+
     $user = User::factory()->create();
 
     $userItem = Item::factory()->create([

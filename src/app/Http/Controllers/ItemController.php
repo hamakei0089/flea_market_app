@@ -40,10 +40,11 @@ class ItemController extends Controller
                 }
             })
             ->with(['item' => function ($query) use ($user) {
-                $query->where('user_id', '!=', $user->id)
-                      ->orWhereNull('user_id')
-                      ->with('purchase');
-            }]);
+            $query->where(function ($q) use ($user) {
+            $q->where('user_id', '!=', $user->id)
+            ->orWhereNull('user_id');
+            })->with('purchase');
+        }]);
 
         $myLists = $myListsQuery->get();
     }
