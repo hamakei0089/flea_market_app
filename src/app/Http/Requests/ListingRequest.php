@@ -25,7 +25,7 @@ class ListingRequest extends FormRequest
         'thumbnail' => ['required','mimes:jpeg,png'],
         'name' => ['required','max:255'],
         'brand_name' => ['nullable'],
-        'category' => ['required'],
+        'category' => ['required', 'array', 'min:1'],
         'condition' => ['required'],
         'description' => ['required','max:255'],
         'price' => ['required' ,'numeric', 'min:1'],

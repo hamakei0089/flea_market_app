@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const reader = new FileReader();
             reader.onload = function(e) {
-
                 fileUploadSection.style.backgroundImage = `url(${e.target.result})`;
                 fileUploadSection.style.backgroundSize = 'contain';
                 fileUploadSection.style.backgroundPosition = 'left';
@@ -33,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('.category-btn');
     categoryButtons.forEach(button => {
         button.addEventListener('click', function () {
-            const categoryId = this.dataset.categoryId;
             const hiddenInput = this.nextElementSibling;
+            // toggle the disabled attribute
             if (hiddenInput.disabled) {
                 hiddenInput.disabled = false;
                 this.classList.add('selected');
@@ -42,6 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 hiddenInput.disabled = true;
                 this.classList.remove('selected');
             }
+        });
+    });
+
+    // 追加: フォーム送信時に全てのカテゴリーの hidden input の disabled 属性を解除
+    const form = document.querySelector('.listing-form');
+    form.addEventListener('submit', function() {
+        const categoryInputs = document.querySelectorAll('input[name="categories[]"]');
+        categoryInputs.forEach(input => {
+            input.disabled = false;
         });
     });
 

@@ -13,6 +13,7 @@ use App\Models\PaymentMethod;
 use Database\Seeders\ConditionsTableSeeder;
 use Database\Seeders\PaymentMethodsTableSeeder;
 
+
 class ItemTest extends TestCase
 {
     /**
@@ -23,7 +24,10 @@ class ItemTest extends TestCase
      /** @test */
     public function it_displays_all_items()
     {
-        $this->seed(ConditionsTableSeeder::class);
+
+        Artisan::call('migrate:refresh');
+        Artisan::call('db:seed');
+
         Item::factory()->count(3)->create();
 
         $response = $this->get('/');
@@ -39,9 +43,7 @@ class ItemTest extends TestCase
     public function Sold_label_is_displayed_for_purchased_items()
 {
     Artisan::call('migrate:refresh');
-    Artisan::call('db:seed', ['--class' => 'ConditionsTableSeeder']);
-
-    $this->seed(PaymentMethodsTableSeeder::class);
+    Artisan::call('db:seed');
 
     $user = User::factory()->create();
     $this->actingAs($user);

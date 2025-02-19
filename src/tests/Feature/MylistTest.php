@@ -27,7 +27,7 @@ class MylistTest extends TestCase
     {
 
         Artisan::call('migrate:refresh');
-        Artisan::call('db:seed', ['--class' => 'ConditionsTableSeeder']);
+        Artisan::call('db:seed');
 
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -59,7 +59,7 @@ class MylistTest extends TestCase
     {
 
         Artisan::call('migrate:refresh');
-        Artisan::call('db:seed', ['--class' => 'ConditionsTableSeeder']);
+        Artisan::call('db:seed');
 
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -70,8 +70,6 @@ class MylistTest extends TestCase
             'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
-
-        $this->seed(PaymentMethodsTableSeeder::class);
 
         Purchase::factory()->create([
             'item_id' => $item->id,
