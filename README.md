@@ -85,6 +85,13 @@ config/service.phpに以下を追加　　
     ],
 
 
+5. test実行のため、以下のコマンドを入力
+
+composer require --dev laravel/dusk　　
+
+php artisan dusk:install　　
+
+
 5. 「.env.example」ファイルを「.env」ファイルに命名を変更　　
 
 6. .envに以下の環境変数を変更　　

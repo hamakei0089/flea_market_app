@@ -108,8 +108,8 @@ class MylistTest extends TestCase
 
     $response = $this->actingAs($user)->get('/?page=mylist');
 
-    $response->assertDontSee($userItem->name);
-    $response->assertDontSee($userItem->thumbnail);
+    $response->assertDontSeeText($userItem->name);
+    $response->assertDontSeeText($userItem->thumbnail);
     }
 
     /** @test */
