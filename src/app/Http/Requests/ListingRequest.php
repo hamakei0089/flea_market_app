@@ -22,25 +22,25 @@ class ListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'thumbnail' => ['required','mimes:jpeg,png'],
-        'name' => ['required','max:255'],
+        'name' => ['required','string','max:255'],
         'brand_name' => ['nullable'],
-        'category' => ['required', 'array', 'min:1'],
-        'condition' => ['required'],
         'description' => ['required','max:255'],
+        'thumbnail' => ['required','mimes:jpeg,png'],
+        'categories' => ['required', 'array', 'min:1'],
+        'condition' => ['required'],
         'price' => ['required' ,'numeric', 'min:1'],
         ];
     }
     public function messages(): array
     {
         return [
-            'thumbnail.required' => '商品画像を選択して下さい。',
             'name.required' => '商品名を入力して下さい。',
             'name.max' => '名前は255文字以内で入力してください。',
-            'category.required' => 'カテゴリーは1つ以上選択して下さい。',
-            'condition.required' => '商品の状態を選択して下さい。',
             'description.required' => '商品の説明を入力してください。',
             'description.max' => '商品の説明は255文字以内で入力してください。',
+            'thumbnail.required' => '商品画像を選択して下さい。',
+            'categories.required' => 'カテゴリーは1つ以上選択して下さい。',
+            'condition.required' => '商品の状態を選択して下さい。',
             'price.required' => '金額を入力してください。',
             'price.numeric' => '金額は数字のみで入力してください。',
             'price.min' => '金額は１円以上で入力してください。',

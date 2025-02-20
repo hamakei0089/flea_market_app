@@ -63,7 +63,7 @@ Dockerビルド
 
 2. DockerDesktopを立ち上げる　　
 
-3. docker-compose up -d –build　　
+3. docker-compose up -d 　　
 
 Laravel環境構築　　
 

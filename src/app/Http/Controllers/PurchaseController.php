@@ -47,7 +47,7 @@ class PurchaseController extends Controller
     return redirect()->route('purchase.form', ['item' => $item->id])->with('success' , '住所を変更しました。');
     }
 
-    public function checkout(Request $request, Item $item)
+    public function checkout(PurchaseRequest $request, Item $item)
 {
     $user = auth()->user();
 

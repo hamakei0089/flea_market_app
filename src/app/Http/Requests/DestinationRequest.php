@@ -27,7 +27,7 @@ class DestinationRequest extends FormRequest
         'building' => ['nullable' , 'string' , 'max:255'],
         ];
     }
-     public function messages(): array
+    public function messages(): array
     {
         return [
             'post_code.required' => '郵便番号を入力して下さい。',

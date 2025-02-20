@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     categoryButtons.forEach(button => {
         button.addEventListener('click', function () {
             const hiddenInput = this.nextElementSibling;
-            // toggle the disabled attribute
+
             if (hiddenInput.disabled) {
                 hiddenInput.disabled = false;
                 this.classList.add('selected');
@@ -41,15 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hiddenInput.disabled = true;
                 this.classList.remove('selected');
             }
-        });
-    });
-
-    // 追加: フォーム送信時に全てのカテゴリーの hidden input の disabled 属性を解除
-    const form = document.querySelector('.listing-form');
-    form.addEventListener('submit', function() {
-        const categoryInputs = document.querySelectorAll('input[name="categories[]"]');
-        categoryInputs.forEach(input => {
-            input.disabled = false;
         });
     });
 
