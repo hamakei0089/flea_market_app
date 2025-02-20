@@ -52,7 +52,13 @@ MySQL8.1　　
 
 ## テーブル設計
 
+![Alt text](table1.png)  
+![Alt text](table2.png)  
+![Alt text](table3.png)  
+
 ## ER図
+
+![Alt text](ERD.png)  
 
 # 環境構築
 
