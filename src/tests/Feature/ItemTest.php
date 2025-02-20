@@ -87,10 +87,10 @@ class ItemTest extends TestCase
 
     $response = $this->actingAs($user)->get('/');
 
-    $response->assertDontSee($userItem->name);
+    $response->assertDontSeeText($userItem->name);
     $response->assertDontSee($userItem->thumbnail);
 
-    $response->assertSee($otherItem->name);
+    $response->assertSeeText($otherItem->name);
     $response->assertSee($otherItem->thumbnail);
 }
 

@@ -8,7 +8,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Artisan;
 
-class PurchasePaymentMethodTest extends DuskTestCase
+class PaymentMethodTest extends DuskTestCase
 {
 
     /** @test */
