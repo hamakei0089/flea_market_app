@@ -34,7 +34,7 @@
                     <input type="hidden" name="categories[]" value="{{ $category->id }}" disabled>
                     @endforeach
                     <div class="form-error">
-                        @error('category')
+                        @error('categories')
                         {{ $message }}
                         @enderror
                     </div>
