@@ -29,7 +29,7 @@ class PurchaseController extends Controller
         $user = auth()->user();
         $search = '';
 
-        return view('edit-address' , compact('user' , 'item', 'search'));
+        return view('edit_address' , compact('user' , 'item', 'search'));
     }
 
     public function updateAddress(DestinationRequest $request , Item $item)
