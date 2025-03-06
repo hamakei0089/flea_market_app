@@ -27,6 +27,9 @@
             <li class="tab-item {{ $viewTypes === 'buy' ? 'active' : '' }}">
                 <a class="tab-title" href="{{ route('mypage.index', ['page' => 'buy']) }}">購入した商品</a>
             </li>
+            <li class="tab-item {{ $viewTypes === 'dealing' ? 'active' : '' }}">
+                <a class="tab-title" href="{{ route('mypage.index', ['page' => 'dealing']) }}">取引中の商品</a>
+            </li>
         </ul>
     </div>
 
@@ -59,6 +62,22 @@
             @endforeach
         </div>
         @endif
+
+        @else ($viewTypes === 'dealing')
+        <div class="items-grid">
+            @foreach ($chatItems as $chatItem)
+            <div class="item-card">
+                <div class="item-thumbnail">
+                    <a href="{{ route('item.dealing', ['item' => $chatItem->id]) }}">
+                    <img src="{{ asset('storage/' . $chatItem->item->thumbnail) }}" alt="{{ $chatItem->item->name }}">
+                    </a>
+                </div>
+                <p class="item-name">{{ $chatItem->item->name }}</p>
+            </div>
+            @endforeach
+        </div>
+        @endif
+
     </div>
 </div>
 @endsection

@@ -14,9 +14,10 @@ class MypageController extends Controller
 
     $sellItems = $user->items()->get();
     $buyItems = $user->purchases()->get();
+    $messageItems = $user->chats()->get();
 
     $search = '';
 
-    return view('mypage', compact('user', 'sellItems', 'buyItems', 'viewTypes', 'search'));
+    return view('mypage', compact('user', 'sellItems', 'buyItems', 'viewTypes','messageItems', 'search'));
 }
 }

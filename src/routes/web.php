@@ -9,6 +9,7 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +62,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/purchase/{item}/success', [PurchaseController::class, 'success'])->name('purchase.success');
     Route::get('/purchase/{item}/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
 
+    Route::get('/message/{item}', [MessageController::class, 'index'])->name('item.deal');
 
 });
