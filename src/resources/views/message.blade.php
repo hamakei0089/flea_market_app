@@ -16,9 +16,11 @@
         <div class="partner-container">
             <img class="partner-thumbnail" src="{{ $partner->thumbnail ? asset('storage/' . $partner->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $partner->name }}" />
             <h2 class="partner-name">「{{ $partner->name }}」 さんとの取引画面</h2>
+            @if($firstMessageSenderId === auth()->id())
             <div class="deal-done">
                 <button class="deal-done-btn" type=submit>取引を完了する</button>
             </div>
+            @endif
         </div>
 
         <div class="item-container">
@@ -75,7 +77,7 @@
                 <div class="file-upload-section">
                     <label class="form-label" for="thumbnail">
                         <input type="file" id="thumbnail" name="thumbnail" style="display: none;">
-                        <button type="button" class="file-upload-btn">画像を選択する</button>
+                        <button type="button" class="file-upload-btn">画像を追加　</button>
                     </label>
                     <span id="file-name" style="display: none; margin-top: 10px;"></span>
                 </div>

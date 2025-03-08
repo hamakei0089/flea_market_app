@@ -23,14 +23,17 @@ class MessageController extends Controller
         if($messages->count()>0){
             $firstMessage=$messages->first();
 
+            $firstMessageSenderId = $firstMessage->sender_id;
+
             $partner=auth()->id() === $firstMessage->sender_id ? User::find($firstMessage->receiver_id) : User::find($firstMessage->sender_id);
 
         }else{
 
             $partner = User::find($item->user_id);
+            $firstMessageSenderId = null;
         }
 
-        return view('message' , compact('item', 'messages', 'partner'));
+        return view('message' , compact('item', 'messages', 'partner', 'firstMessageSenderId'));
     }
 
     public function store(Request $request, $item_id){

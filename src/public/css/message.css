@@ -203,10 +203,11 @@
 }
 
 .message {
-    width: 350px;
+    max-width: 350px;
     word-wrap: break-word;
     border-radius: 10px;
     font-size: 14px;
+    padding: 0 5px;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -215,7 +216,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #f9f9f9;
     padding: 10px;
     border-radius: 8px;
     width: 100%;
@@ -239,7 +239,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ddd;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -248,20 +247,25 @@
 }
 
 .file-upload-btn {
-    background: none;
-    border: none;
-    font-size: 14px;
+    background-color: white;
+    color: #ff5555;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 5px;
+    border-radius: 4px;
+    border: 2px solid #ff5555;
     cursor: pointer;
 }
 
 .send-btn {
-    background: none;
+    background-color: white;
     border: none;
     padding: 5px;
     cursor: pointer;
 }
 
 .send-btn img {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
