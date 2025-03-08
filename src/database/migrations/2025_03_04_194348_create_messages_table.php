@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->string('message');
+            $table->string('thumbnail')->nullable();
             $table->boolean('is_read')->default(false);
             $table->boolean('is_deal_complete')->default(false);
             $table->timestamps();

@@ -63,5 +63,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/purchase/{item}/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
 
     Route::get('/message/{item}', [MessageController::class, 'index'])->name('item.deal');
+    Route::post('/message/{item}/send', [MessageController::class, 'store'])->name('message.send');
+    Route::get('/message/{message}/edit', [MessageController::class, 'edit'])->name('message.edit');
+    Route::put('/message/{message}', [MessageController::class, 'update'])->name('message.update');
+    Route::delete('/message/{message}', [MessageController::class, 'destroy'])->name('message.destroy');
 
 });

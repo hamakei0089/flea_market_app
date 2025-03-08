@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
                 'post_code' => $faker->regexify('[0-9]{3}-[0-9]{4}'),
                 'address' => $faker->address,
                 'building' => $faker->secondaryAddress,
-                'thumbnail' => 'src/storage/app/public/profiles/human.jpeg',
+                'thumbnail' => 'profiles/human.jpeg',
                 'is_profile_complete' => 1,
             ]);
         }

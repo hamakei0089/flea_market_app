@@ -13,9 +13,11 @@
 
 <body>
   <header class="header">
-    <div class="header__inner">
+    <div class="header-inner">
       <div class="header-utilities">
+        <a href="/" class="header-logo">
         <img src="{{ asset('storage/images/logo.svg') }}" alt="Logo">
+        </a>
       </div>
     </div>
   </header>
