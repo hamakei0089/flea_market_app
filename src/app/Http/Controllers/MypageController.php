@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\DB;
 
 
@@ -12,6 +13,9 @@ class MypageController extends Controller
     public function index(Request $request)
 {
     $user = auth()->user();
+
+    $averageScore = Evaluation::where('evaluated_id', $user->id)->avg('score');
+    $roundedScore = round($averageScore);
 
     $viewTypes = $request->get('page', 'sell');
 
@@ -63,7 +67,7 @@ class MypageController extends Controller
 
     $search = '';
 
-    return view('mypage', compact('user', 'sellItems', 'buyItems', 'viewTypes', 'messageItems', 'unreadCount', 'search'));
+    return view('mypage', compact('user','averageScore','roundedScore', 'sellItems', 'buyItems', 'viewTypes', 'messageItems', 'unreadCount', 'search'));
 }
 
 }

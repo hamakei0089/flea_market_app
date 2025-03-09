@@ -101,10 +101,9 @@
 }
 
 .profile-name {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
-    margin-left: 30px;
-    margin-right: 20px;
+    margin: 10px 20px 0 30px;
 }
 
 .profile-edit-btn {
@@ -129,6 +128,31 @@
     border-radius: 5px;
     margin-bottom: 20px;
 }
+
+.evaluation {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.star {
+    color: #ccc;
+}
+
+.star.filled {
+    color: gold;/
+}
+
+.stars {
+    display: inline-block;
+    font-size: 40px;
+}
+
+.no-value {
+    color: #ccc;
+    display: inline-block;
+    font-size: 40px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .tabs-menu {
         display: flex;

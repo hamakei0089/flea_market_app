@@ -15,8 +15,8 @@ class EvaluationController extends Controller
             ->orderBy('created_at', 'asc')
             ->firstOrFail();
 
-        $evaluatedId = (Auth::id() === $message->sender_id) 
-            ? $message->receiver_id 
+        $evaluatedId = (Auth::id() === $message->sender_id)
+            ? $message->receiver_id
             : $message->sender_id;
 
         Evaluation::create([

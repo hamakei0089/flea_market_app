@@ -12,7 +12,22 @@
 
 <div class="profile-info">
     <img class="profile-thumbnail" src="{{ $user->thumbnail ? asset('storage/' . $user->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $user->name }}" />
-    <p class="profile-name">{{Auth::user()->name}}</p>
+    <div class="profile">
+        <p class="profile-name">{{Auth::user()->name}}</p>
+            @if($averageScore)
+                <div class="stars">
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <= $roundedScore)
+                            <span class="star filled">★</span>
+                        @else
+                            <span class="star">☆</span>
+                        @endif
+                    @endfor
+                </div>
+            @else
+            <span class="no-value">★★★★★</span>
+            @endif
+    </div>
     <form action="{{ route('profile.form') }}" method="get">
         <button type="submit" class="profile-edit-btn">プロフィールを編集</button>
     </form>
