@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('message_id');
+            $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('evaluator_id');
             $table->unsignedBigInteger('evaluated_id');
             $table->unsignedTinyInteger('score');
             $table->timestamps();
 
-            $table->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('evaluator_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('evaluated_id')->references('id')->on('users')->onDelete('cascade');
         });

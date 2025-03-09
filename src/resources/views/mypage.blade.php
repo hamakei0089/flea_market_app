@@ -73,7 +73,7 @@
                     @if($messageItem->unread_count > 0)
                     <span class="unread-marker">{{ $messageItem->unread_count }}</span>
                     @endif
-                    <a href="{{ route('item.deal', ['item' => $messageItem->item->id]) }}">
+                    <a href="{{ route('item.deal', ['item' => $messageItem->item->id , 'firstSenderId' => $messageItem->firstMessageSenderId]) }}">
                         <img src="{{ asset('storage/' . $messageItem->item->thumbnail) }}" alt="{{ $messageItem->item->name }}">
                     </a>
                 </div>

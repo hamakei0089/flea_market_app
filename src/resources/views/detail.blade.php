@@ -52,7 +52,7 @@
             <p class="sold-out">この商品は売り切れました</p>
         @else
             <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
-            <a href="{{ route('item.deal', ['item' => $item->id]) }}" class="deal-btn">出品者と取引を行う</a>
+            <a href="{{ route('item.deal', ['item' => $item->id , 'firstSenderId' => auth()->id()]) }}" class="deal-btn">出品者と取引を行う</a>
         @endif
         <h2 class="section-title">商品説明</h2>
         <p class="item-description">{{ $item->description }}</p>

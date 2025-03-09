@@ -6,10 +6,31 @@
 
 .other-deals {
     width: 250px;
-    background-color: #f8f9fa;
+    background-color: #868686;
+    color: white;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.deal-theme{
+    text-align: center;
+    font-size: 35px;
+    margin-top: -5px;
+}
+
+.item-btn {
+    display: inline-block;
+    width: 80%;
+    margin: 0 0 20px 20px;
+    background-color: #EEEFEB;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
 }
 
 .deal-container {
@@ -268,4 +289,85 @@
 .send-btn img {
     width: 40px;
     height: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-container {
+    position: fixed;
+    width: 450px;
+    max-height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FDFCE6;
+    border: 1px solid;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.modal-theme{
+    width: 100%;
+    border-bottom: 1px solid;
+}
+
+.theme1{
+    font-size: 28px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.theme2 {
+    font-size: 16px;
+    color: #868686;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+.star {
+    font-size: 70px;
+    justify-content: center;
+    color: #ccc;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.1s;
+}
+
+.star.hover,
+.star.selected {
+    color: gold;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked+.star {
+    color: gold;
+}
+
+.btn{
+    display: flex;
+    justify-content: flex-end;
+    height: 70px;
+}
+
+.evaluation-btn{
+    align-self: flex-end;
+    font-size: 20px;
+    margin: 10px 10px 15px 10px;
+    padding: 5px;
+    color: white;
+    background-color: #ff5555;
+    border-radius: 5px;
+    border: none;
 }

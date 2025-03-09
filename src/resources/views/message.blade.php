@@ -9,7 +9,14 @@
 <div class="message-box">
 
     <div class="other-deals">
-        <h2>その他の取引</h2>
+        <h2 class="deal-theme">その他の取引</h2>
+            @foreach ($messageItems as $messageItem)
+            <div class="item-card">
+                <a href="{{ route('item.deal', ['item' => $messageItem->item->id , 'firstSenderId' => $firstMessageSenderId]) }}" class="item-btn">
+                <p class="item-name">{{ $messageItem->item->name }}</p>
+            </a>
+            </div>
+            @endforeach
     </div>
 
     <div class="deal-container">
@@ -17,9 +24,37 @@
             <img class="partner-thumbnail" src="{{ $partner->thumbnail ? asset('storage/' . $partner->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $partner->name }}" />
             <h2 class="partner-name">「{{ $partner->name }}」 さんとの取引画面</h2>
             @if($firstMessageSenderId === auth()->id())
-            <div class="deal-done">
-                <button class="deal-done-btn" type=submit>取引を完了する</button>
-            </div>
+                <div class="deal-done">
+                    <form action="{{ route('deal.done', [$item->id ,'firstSenderId' => $firstMessageSenderId ]) }}" method="post">
+                            @csrf
+                    <button class="deal-done-btn" type="button" id="deal-done-btn">取引を完了する</button>
+                    </form>
+                </div>
+
+                <div id="review-modal" class="modal hidden">
+                    <div class="modal-container">
+                        <div class="modal-theme">
+                            <p class="theme1">取引が完了しました。</p>
+                        </div>
+                        <p class="theme2">今回の取引相手はどうでしたか？</p>
+                            <form action="{{ route('evaluation.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $item->id }}">
+                                <div class="rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <label for="star{{ $i }}">
+                                            <input type="radio" id="star{{ $i }}" name="score" value="{{ $i }}" required>
+                                            <span class="star" data-value="{{ $i }}">★</span>
+                                        </label>
+                                    @endfor
+                                </div>
+                                <div class="btn">
+                                    <button type="submit" class="evaluation-btn">送信する</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+
             @endif
         </div>
 
@@ -69,7 +104,7 @@
             @endforeach
         </div>
 
-        <form action="{{ route('message.send', $item->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('message.send', [$item->id, 'firstSenderId' => $firstMessageSenderId]) }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="send-form">
                 <input type="hidden" name="receiver_id" value="{{ $partner->id }}">

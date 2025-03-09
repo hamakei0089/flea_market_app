@@ -29,3 +29,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+$(document).ready(function () {
+    $("#deal-done-btn").on("click", function () {
+        $("#review-modal").removeClass("hidden");
+    });
+
+    $("#close-modal").on("click", function () {
+        $("#review-modal").addClass("hidden");
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const value = star.getAttribute('data-value');
+            highlightStars(value);
+        });
+
+        star.addEventListener('mouseout', () => {
+            if (selectedRating === 0) {
+                resetStars();
+            } else {
+                highlightStars(selectedRating);
+            }
+        });
+
+        star.addEventListener('click', () => {
+            selectedRating = star.getAttribute('data-value');
+            highlightStars(selectedRating);
+            updateRadioButton(selectedRating); // ラジオボタンの評価を更新
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            const value = star.getAttribute('data-value');
+            if (value <= rating) {
+                star.classList.add('hover');
+            } else {
+                star.classList.remove('hover');
+            }
+        });
+    }
+
+    function resetStars() {
+        stars.forEach(star => {
+            star.classList.remove('hover');
+        });
+    }
+
+    // ラジオボタンを評価に合わせて更新
+    function updateRadioButton(rating) {
+        const radioButton = document.querySelector(`input[name="rating"][value="${rating}"]`);
+        if (radioButton) {
+            radioButton.checked = true;
+        }
+    }
+});
