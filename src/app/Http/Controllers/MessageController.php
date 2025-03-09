@@ -27,6 +27,11 @@ class MessageController extends Controller
 
             $partner=auth()->id() === $firstMessage->sender_id ? User::find($firstMessage->receiver_id) : User::find($firstMessage->sender_id);
 
+            Message::where('item_id', $item->id)
+            ->where('receiver_id', auth()->id())
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
         }else{
 
             $partner = User::find($item->user_id);

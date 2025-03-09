@@ -29,6 +29,9 @@
             </li>
             <li class="tab-item {{ $viewTypes === 'dealing' ? 'active' : '' }}">
                 <a class="tab-title" href="{{ route('mypage.index', ['page' => 'dealing']) }}">取引中の商品</a>
+                @if($unreadCount > 0)
+                <span class="tab-unread-count">{{ $unreadCount }}</span>
+                @endif
             </li>
         </ul>
     </div>
@@ -67,6 +70,9 @@
             @foreach ($messageItems as $messageItem)
             <div class="item-card">
                 <div class="item-thumbnail">
+                    @if($messageItem->unread_count > 0)
+                    <span class="unread-marker">{{ $messageItem->unread_count }}</span>
+                    @endif
                     <a href="{{ route('item.deal', ['item' => $messageItem->item->id]) }}">
                         <img src="{{ asset('storage/' . $messageItem->item->thumbnail) }}" alt="{{ $messageItem->item->name }}">
                     </a>

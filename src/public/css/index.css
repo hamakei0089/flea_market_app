@@ -28,6 +28,14 @@
     color: #333;
 }
 
+.tab-unread-count {
+    background-color: red;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 18px;
+    color: white;
+}
+
 .items-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -54,6 +62,15 @@
     font-size: 16px;
     font-weight: bold;
     color: #333;
+}
+
+.unread-marker {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    padding: 3px 10px;
+    font-size: 20px;
+    color: white;
 }
 
 .sold-label {

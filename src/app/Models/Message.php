@@ -15,6 +15,7 @@ class Message extends Model
         'receiver_id',
         'message',
         'thumbnail',
+        'is_read',
         'is_deal_complete',
     ];
 
