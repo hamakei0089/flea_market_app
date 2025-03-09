@@ -61,18 +61,17 @@
             </div>
             @endforeach
         </div>
-        @endif
 
-        @else ($viewTypes === 'dealing')
+        @elseif ($viewTypes === 'dealing')
         <div class="items-grid">
-            @foreach ($chatItems as $chatItem)
+            @foreach ($messageItems as $messageItem)
             <div class="item-card">
                 <div class="item-thumbnail">
-                    <a href="{{ route('item.dealing', ['item' => $chatItem->id]) }}">
-                    <img src="{{ asset('storage/' . $chatItem->item->thumbnail) }}" alt="{{ $chatItem->item->name }}">
+                    <a href="{{ route('item.deal', ['item' => $messageItem->item->id]) }}">
+                        <img src="{{ asset('storage/' . $messageItem->item->thumbnail) }}" alt="{{ $messageItem->item->name }}">
                     </a>
                 </div>
-                <p class="item-name">{{ $chatItem->item->name }}</p>
+                <p class="item-name">{{ $messageItem->item->name }}</p>
             </div>
             @endforeach
         </div>
