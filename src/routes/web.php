@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/message/{item}/{firstSenderId}/send', [MessageController::class, 'store'])->name('message.send');
     Route::get('/message/{message}/edit', [MessageController::class, 'edit'])->name('message.edit');
     Route::put('/message/{message}/update', [MessageController::class, 'update'])->name('message.update');
-    Route::delete('/message/{message}', [MessageController::class, 'destroy'])->name('message.destroy');
+    Route::delete('/message/{message}/delete', [MessageController::class, 'destroy'])->name('message.destroy');
     Route::post('/message/{item}/{firstSenderId}/done', [MessageController::class, 'dealDone'])->name('deal.done');
 
     Route::post('/deal/evaluation', [EvaluationController::class, 'store'])->name('evaluation.store');
