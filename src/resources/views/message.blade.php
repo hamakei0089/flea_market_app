@@ -27,11 +27,12 @@
                 <div class="deal-done">
                     <form action="{{ route('deal.done', [$item->id ,'firstSenderId' => $firstMessageSenderId ]) }}" method="post">
                             @csrf
-                    <button class="deal-done-btn" type="button" id="deal-done-btn">取引を完了する</button>
+                    <button class="deal-done-btn" type="submit" id="deal-done-btn">取引を完了する</button>
                     </form>
                 </div>
+            @endif
 
-                <div id="review-modal" class="modal hidden">
+                <div id="review-modal" class="modal {{ $evaluation_modal ? '' : 'hidden' }}">
                     <div class="modal-container">
                         <div class="modal-theme">
                             <p class="theme1">取引が完了しました。</p>
@@ -54,8 +55,6 @@
                             </form>
                     </div>
                 </div>
-
-            @endif
         </div>
 
         <div class="item-container">
@@ -106,9 +105,15 @@
 
         <form action="{{ route('message.send', [$item->id, 'firstSenderId' => $firstMessageSenderId]) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                    @error('message')
+                    {{ $message }}
+                    @enderror
+                    @error('thumbnail')
+                    {{ $message }}
+                    @enderror
             <div class="send-form">
                 <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
-                <textarea  class="message-text" name="message" placeholder="取引メッセージを記入してください" required></textarea>
+                <textarea  class="message-text" name="message" placeholder="取引メッセージを記入してください" ></textarea>
                 <div class="file-upload-section">
                     <label class="form-label" for="thumbnail">
                         <input type="file" id="thumbnail" name="thumbnail" style="display: none;">

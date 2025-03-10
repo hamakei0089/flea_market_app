@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\MessageRequest;
 
 
 class MessageController extends Controller
@@ -40,6 +41,15 @@ class MessageController extends Controller
             ->first()?->sender_id ?? auth()->id();
     }
 
+    $evaluationModal = false;
+    if ($messages->count() > 0) {
+        $firstMessage = $messages->first();
+
+        if ($firstMessage->is_deal_complete) {
+        $evaluationModal = true;
+        }
+    }
+
     $messageItems = Message::where(function ($query) use ($user) {
         $query->where('sender_id', $user->id)
             ->orWhere('receiver_id', $user->id);
@@ -53,11 +63,14 @@ class MessageController extends Controller
         return $messageItem->item_id == $item->id;
     });
 
-    return view('message', compact('item', 'messages', 'partner','messageItems', 'firstMessageSenderId', 'otherDealItems'));
+    return view('message', compact('item', 'messages', 'partner','messageItems', 'firstMessageSenderId', 'otherDealItems'))
+    ->with('evaluation_modal', $evaluationModal);
 }
 
 
-    public function store(Request $request, $item_id){
+    public function store(MessageRequest $request, $item_id){
+
+        $validated = $request->validated();
 
         $image_path = $request->hasFile('thumbnail') ? $request->file('thumbnail')->store('images', 'public') : null;
 
@@ -72,7 +85,7 @@ class MessageController extends Controller
             'item_id' => $item->id,
             'sender_id' => Auth::id(),
             'receiver_id' =>$receiver_id,
-            'message' => $request->input('message'),
+            'message' => $validated['message'],
             'thumbnail' => $image_path,
         ]);
         $firstMessageSenderId = Message::where('item_id', $item->id)
@@ -94,7 +107,7 @@ class MessageController extends Controller
     }
 
 
-    public function update(Request $request, Message $message){
+    public function update(MessageRequest $request, Message $message){
 
     if($message->sender_id !== auth()->id()){
         abort(403);

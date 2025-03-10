@@ -22,7 +22,19 @@ class MessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'message' => ['required','max:400'],
+            'thumbnail' => ['mimes:jpeg,png'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'message.required' => '本文を入力してください',
+            'message.max' => '本文は400文字以内で入力してください',
+            'thumbnail.mimes' => '「.png」または「.jpg」形式でアップロードしてください',
+        ];
+    }
+
+
 }
