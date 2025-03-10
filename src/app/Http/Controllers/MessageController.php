@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\MessageRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DealCompleteNotification;
 
 
 class MessageController extends Controller
@@ -168,6 +169,12 @@ class MessageController extends Controller
         $firstMessageSenderId = Message::where('item_id', $itemId)
             ->orderBy('created_at', 'asc')
             ->first()?->sender_id ?? auth()->id();
+
+
+        $item = Item::findOrFail($itemId);
+        $seller = $item->user;
+
+        Mail::to($seller->email)->send(new DealCompleteNotification($item));
 
         return redirect()->route('item.deal', ['item' => $itemId, 'firstSenderId' => $firstMessageSenderId])
             ->with('evaluation_modal', true);
