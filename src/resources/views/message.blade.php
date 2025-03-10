@@ -79,7 +79,7 @@
                     <p class="message-sender-name">{{ $message->sender->name }}</p>
                 </div>
                 <div class="message {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
-                    <p class="message">{{ $message->message }}</p>
+                    <p class="message-body">{{ $message->message }}</p>
                 </div>
                 <div class="message-thumbnail {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
                     @if ($message->thumbnail)
