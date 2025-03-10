@@ -291,6 +291,11 @@
     height: 40px;
 }
 
+.form-error {
+    height: 20px;
+    color: #ff0000;
+}
+
 .hidden {
     display: none;
 }

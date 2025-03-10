@@ -103,14 +103,17 @@
             @endforeach
         </div>
 
-        <form action="{{ route('message.send', [$item->id, 'firstSenderId' => $firstMessageSenderId]) }}" method="post" enctype="multipart/form-data">
+        <form id="messageForm" action="{{ route('message.send', [$item->id, 'firstSenderId' => $firstMessageSenderId]) }}" method="post" enctype="multipart/form-data">
                 @csrf
-                    @error('message')
-                    {{ $message }}
-                    @enderror
-                    @error('thumbnail')
-                    {{ $message }}
-                    @enderror
+            <div class="form-error">
+                @error('message')
+                {{ $message }}
+                @enderror
+                @error('thumbnail')
+                {{ $message }}
+                @enderror
+            </div>
+
             <div class="send-form">
                 <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
                 <textarea  class="message-text" name="message" placeholder="取引メッセージを記入してください" ></textarea>

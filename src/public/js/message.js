@@ -39,6 +39,7 @@ $(document).ready(function () {
         $("#review-modal").addClass("hidden");
     });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
     let selectedRating = 0;
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         star.addEventListener('click', () => {
             selectedRating = star.getAttribute('data-value');
             highlightStars(selectedRating);
-            updateRadioButton(selectedRating); // ラジオボタンの評価を更新
+            updateRadioButton(selectedRating);
         });
     });
 
@@ -81,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ラジオボタンを評価に合わせて更新
     function updateRadioButton(rating) {
         const radioButton = document.querySelector(`input[name="rating"][value="${rating}"]`);
         if (radioButton) {
@@ -89,3 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const textarea = document.querySelector(".message-text");
+    const storageKey = "chat_message_{{ $item->id }}_{{ auth()->id() }}";
+
+    if (localStorage.getItem(storageKey)) {
+        textarea.value = localStorage.getItem(storageKey);
+    }
+
+    textarea.addEventListener("input", function() {
+        localStorage.setItem(storageKey, textarea.value);
+    });
+
+    const form = document.getElementById("messageForm");
+    form.addEventListener("submit", function() {
+        localStorage.removeItem(storageKey);
+    });
+});
+
+
