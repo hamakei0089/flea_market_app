@@ -65,7 +65,7 @@ MySQL8.1　　
 
 ## ER図
 
-![Alt text](ERD.png)  
+![Alt text](ER.png)  
 
 # 環境構築
 
