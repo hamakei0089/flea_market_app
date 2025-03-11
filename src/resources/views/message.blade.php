@@ -13,7 +13,7 @@
             @foreach ($messageItems as $messageItem)
             <div class="item-card">
                 <a href="{{ route('item.deal', ['item' => $messageItem->item->id , 'firstSenderId' => $firstMessageSenderId]) }}" class="item-btn">
-                <p class="item-name">{{ $messageItem->item->name }}</p>
+                <p class="other-item-name">{{ $messageItem->item->name }}</p>
             </a>
             </div>
             @endforeach

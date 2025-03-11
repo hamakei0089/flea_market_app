@@ -24,8 +24,6 @@
                         @endif
                     @endfor
                 </div>
-            @else
-            <span class="no-value">★★★★★</span>
             @endif
     </div>
     <form action="{{ route('profile.form') }}" method="get">

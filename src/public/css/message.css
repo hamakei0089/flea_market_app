@@ -376,3 +376,21 @@ input[type="radio"]:checked+.star {
     border-radius: 5px;
     border: none;
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+
+    .partner-name {
+        font-size: 20px;
+    }
+
+    .item-image{
+        width: 40%;
+    }
+
+
+    .item-info .item-name {
+    font-size: 28px;
+    margin: 0 0 5px;
+}
+    }
