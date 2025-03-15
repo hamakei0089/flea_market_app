@@ -11,17 +11,17 @@ use Illuminate\Support\Facades\DB;
 class MypageController extends Controller
 {
     public function index(Request $request)
-{
-    $user = auth()->user();
+    {
+        $user = auth()->user();
 
-    $averageScore = Evaluation::where('evaluated_id', $user->id)->avg('score');
-    $roundedScore = round($averageScore);
+        $averageScore = Evaluation::where('evaluated_id', $user->id)->avg('score');
+        $roundedScore = round($averageScore);
 
-    $viewTypes = $request->get('page', 'sell');
+        $viewTypes = $request->get('page', 'sell');
 
-    $sellItems = $user->items()->get();
+        $sellItems = $user->items()->get();
 
-    $buyItems = $user->purchases()->get();
+        $buyItems = $user->purchases()->get();
 
     $messageItems = Message::where(function($query) use ($user) {
         $query->where('sender_id', $user->id)

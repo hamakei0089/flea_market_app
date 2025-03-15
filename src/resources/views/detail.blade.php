@@ -49,11 +49,15 @@
             </table>
         </div>
         @if($item->purchase)
+            @if(auth()->id() === $item->purchase->user_id)
+                <a href="{{ route('item.deal', ['item' => $item->id , 'firstSenderId' => auth()->id()]) }}" class="deal-btn">出品者と取引を行う</a>
+            @else
             <p class="sold-out">この商品は売り切れました</p>
+            @endif
         @else
             <a href="{{ route('purchase.form', ['item' => $item->id]) }}" class="purchase-btn">購入手続きへ</a>
-            <a href="{{ route('item.deal', ['item' => $item->id , 'firstSenderId' => auth()->id()]) }}" class="deal-btn">出品者と取引を行う</a>
         @endif
+
         <h2 class="section-title">商品説明</h2>
         <p class="item-description">{{ $item->description }}</p>
         <h2 class="section-title">商品の情報</h2>

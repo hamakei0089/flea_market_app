@@ -16,57 +16,57 @@ class MessageController extends Controller
 {
     public function index(Item $item)
 {
-    $user = auth()->user();
+        $user = auth()->user();
 
-    $messages = Message::where('item_id', $item->id)
-        ->orderBy('created_at', 'asc')
-        ->with('sender')
-        ->get();
-
-    if ($messages->count() > 0) {
-        $firstMessage = $messages->first();
-        $firstMessageSenderId = $firstMessage->sender_id;
-
-        $partner = auth()->id() === $firstMessage->sender_id
-            ? User::find($firstMessage->receiver_id)
-            : User::find($firstMessage->sender_id);
-
-        Message::where('item_id', $item->id)
-            ->where('receiver_id', auth()->id())
-            ->where('is_read', false)
-            ->update(['is_read' => true]);
-    } else {
-        $partner = User::find($item->user_id);
-        $firstMessageSenderId = Message::where('item_id', $item->id)
+        $messages = Message::where('item_id', $item->id)
             ->orderBy('created_at', 'asc')
-            ->first()?->sender_id ?? auth()->id();
-    }
+            ->with('sender')
+            ->get();
 
-    $evaluationModal = false;
-    if ($messages->count() > 0) {
-        $firstMessage = $messages->first();
+        if ($messages->count() > 0) {
+            $firstMessage = $messages->first();
+            $firstMessageSenderId = $firstMessage->sender_id;
 
-        if ($firstMessage->is_deal_complete) {
-        $evaluationModal = true;
+            $partner = auth()->id() === $firstMessage->sender_id
+                ? User::find($firstMessage->receiver_id)
+                : User::find($firstMessage->sender_id);
+
+            Message::where('item_id', $item->id)
+                ->where('receiver_id', auth()->id())
+                ->where('is_read', false)
+                ->update(['is_read' => true]);
+        } else {
+            $partner = User::find($item->user_id);
+            $firstMessageSenderId = Message::where('item_id', $item->id)
+                ->orderBy('created_at', 'asc')
+                ->first()?->sender_id ?? auth()->id();
         }
+
+        $evaluationModal = false;
+        if ($messages->count() > 0) {
+            $firstMessage = $messages->first();
+
+            if ($firstMessage->is_deal_complete) {
+            $evaluationModal = true;
+            }
+        }
+
+        $messageItems = Message::where(function ($query) use ($user) {
+            $query->where('sender_id', $user->id)
+                ->orWhere('receiver_id', $user->id);
+        })
+            ->with('item')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->unique('item_id');
+
+        $otherDealItems = $messageItems->reject(function ($messageItem) use ($item) {
+            return $messageItem->item_id == $item->id;
+        });
+
+        return view('message', compact('item', 'messages', 'partner','messageItems', 'firstMessageSenderId', 'otherDealItems'))
+        ->with('evaluation_modal', $evaluationModal);
     }
-
-    $messageItems = Message::where(function ($query) use ($user) {
-        $query->where('sender_id', $user->id)
-            ->orWhere('receiver_id', $user->id);
-    })
-        ->with('item')
-        ->orderBy('created_at', 'desc')
-        ->get()
-        ->unique('item_id');
-
-    $otherDealItems = $messageItems->reject(function ($messageItem) use ($item) {
-        return $messageItem->item_id == $item->id;
-    });
-
-    return view('message', compact('item', 'messages', 'partner','messageItems', 'firstMessageSenderId', 'otherDealItems'))
-    ->with('evaluation_modal', $evaluationModal);
-}
 
 
     public function store(MessageRequest $request, $item_id){
@@ -100,70 +100,66 @@ class MessageController extends Controller
 
     public function edit(Message $message){
 
-    if($message->sender_id !== auth()->id()){
-        abort(403);
-    }
-
-        return view('edit_message' , compact('message'));
+        return view('edit_message' ,  compact('message'));
     }
 
 
     public function update(MessageRequest $request, Message $message){
 
-    if($message->sender_id !== auth()->id()){
-        abort(403);
-    }
+        if($message->sender_id !== auth()->id()){
+            abort(403);
+        }
 
-        $message->update([
-        'message' => $request->input('message')
-    ]);
+            $message->update([
+            'message' => $request->input('message')
+        ]);
 
-    if ($request->has('delete_thumbnail') && $request->delete_thumbnail) {
+        if ($request->has('delete_thumbnail') && $request->delete_thumbnail) {
+
+                if ($message->thumbnail) {
+                    Storage::delete('public/' . $message->thumbnail);
+                }
+                $message->update(['thumbnail' => null]);
+            }
+
+        if ($request->hasFile('thumbnail')) {
 
             if ($message->thumbnail) {
                 Storage::delete('public/' . $message->thumbnail);
             }
-            $message->update(['thumbnail' => null]);
+            $path = $request->file('thumbnail')->store('messages', 'public');
+
+            $message->update(['thumbnail' => $path]);
+
+            $firstMessageSenderId = Message::where('item_id', $message->item_id)
+            ->orderBy('created_at', 'asc')
+            ->first()?->sender_id ?? auth()->id();
         }
+        return redirect()->route('item.deal', ['item' => $message->item_id, 'firstSenderId' => $firstMessageSenderId])
+            ->with('success', 'メッセージを編集しました。');
 
-    if ($request->hasFile('thumbnail')) {
-
-        if ($message->thumbnail) {
-            Storage::delete('public/' . $message->thumbnail);
         }
-        $path = $request->file('thumbnail')->store('messages', 'public');
-
-        $message->update(['thumbnail' => $path]);
-
-        $firstMessageSenderId = Message::where('item_id', $message->item_id)
-        ->orderBy('created_at', 'asc')
-        ->first()?->sender_id ?? auth()->id();
-    }
-    return redirect()->route('item.deal', ['item' => $message->item_id, 'firstSenderId' => $firstMessageSenderId])
-        ->with('success', 'メッセージを編集しました。');
-
-    }
 
 
     public function destroy(Message $message){
 
-    if($message->sender_id !== auth()->id()){
-        abort(403);
-    }
+        if($message->sender_id !== auth()->id()){
+            abort(403);
+        }
 
-        $message->delete();
+            $message->delete();
 
-        $firstMessageSenderId = Message::where('item_id', $message->item_id)
-        ->orderBy('created_at', 'asc')
-        ->first()?->sender_id ?? auth()->id();
+            $firstMessageSenderId = Message::where('item_id', $message->item_id)
+            ->orderBy('created_at', 'asc')
+            ->first()?->sender_id ?? auth()->id();
 
-        return redirect()->route('item.deal' , ['item' => $message->item_id , 'firstSenderId' => $firstMessageSenderId])
-        ->with('success' , 'メッセージを削除しました。');
-    }
+            return redirect()->route('item.deal' , ['item' => $message->item_id , 'firstSenderId' => $firstMessageSenderId])
+            ->with('success' , 'メッセージを削除しました。');
+        }
 
 
-    public function dealDone($itemId)
-    {
+    public function dealDone($itemId){
+
         Message::where('item_id', $itemId)->update(['is_deal_complete' => true]);
 
         $firstMessageSenderId = Message::where('item_id', $itemId)

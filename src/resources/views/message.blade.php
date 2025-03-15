@@ -81,17 +81,18 @@
                 <div class="message {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
                     <p class="message-body">{{ $message->message }}</p>
                 </div>
-                <div class="message-thumbnail {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
+                <div class="message-thumbnail-wrapper {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
                     @if ($message->thumbnail)
-                    <img class="message-thumbnail" src="{{ asset('storage/' . $message->thumbnail) }}" alt="{{ $message->sender->name }}" />
+                    <img class="message-thumbnail-img" src="{{ asset('storage/' . $message->thumbnail) }}" alt="{{ $message->sender->name }}" />
                     @endif
                 </div>
 
                 @if($message->sender_id === auth()->id())
                 <div class="message-actions">
-                    <form  action="{{ route('message.edit', $message->id) }}" method="get" class="edit-button">
+                    <form  action="{{ route('message.edit' , ['message' => $message->id]) }}" method="get">
                         <button type="submit" class="edit-btn">編集</button>
                     </form>
+
                     <form action="{{ route('message.destroy', $message->id) }}" method="post" class="delete-form" onsubmit="return confirm('このメッセージを削除してよろしいですか？');">
                     @csrf
                     @method('DELETE')
