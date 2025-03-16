@@ -34,6 +34,14 @@
             </label>
             <img id="thumbnail-preview" class="file-preview" src=""  />
         </div>
+        <div class="form-error">
+                @error('message')
+                {{ $message }}
+                @enderror
+                @error('thumbnail')
+                {{ $message }}
+                @enderror
+            </div>
 
         <button type="submit" class="update-btn">更新する</button>
     </form>

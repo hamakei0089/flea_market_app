@@ -105,3 +105,8 @@
 .update-btn:hover {
     background-color: #0056b3;
 }
+
+.form-error {
+    height: 20px;
+    color: #ff0000;
+}

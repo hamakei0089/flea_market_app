@@ -10,11 +10,11 @@
 
     <div class="other-deals">
         <h2 class="deal-theme">その他の取引</h2>
-            @foreach ($messageItems as $messageItem)
+            @foreach ($otherDealItems as $messageItem)
             <div class="item-card">
                 <a href="{{ route('item.deal', ['item' => $messageItem->item->id]) }}" class="item-btn">
                 <p class="other-item-name">{{ $messageItem->item->name }}</p>
-            </a>
+                </a>
             </div>
             @endforeach
     </div>

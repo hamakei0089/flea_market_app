@@ -92,10 +92,6 @@ class MessageController extends Controller
 
     public function update(MessageRequest $request, Message $message){
 
-        if($message->sender_id !== auth()->id()){
-            abort(403);
-        }
-
             $message->update([
             'message' => $request->input('message')
         ]);
