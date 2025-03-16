@@ -28,12 +28,13 @@
     color: #333;
 }
 
-.tab-unread-count {
+.total-unread-count {
     background-color: red;
-    border-radius: 50%;
-    padding: 2px 5px;
+    border-radius: 75%;
+    padding: 3px 8px;
     font-size: 18px;
     color: white;
+    display: inline-block;
 }
 
 .items-grid {
@@ -139,7 +140,7 @@
 }
 
 .star.filled {
-    color: gold;/
+    color: gold;
 }
 
 .stars {

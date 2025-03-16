@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Evaluation;
+use App\Models\Purchase;
+use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,51 +25,29 @@ class MypageController extends Controller
 
         $buyItems = $user->purchases()->get();
 
-    $messageItems = Message::where(function($query) use ($user) {
-        $query->where('sender_id', $user->id)
-            ->orWhere('receiver_id', $user->id);
-    })
-    ->with('item')
-    ->orderBy('created_at', 'desc')
-    ->get();
+        $purchaseItems = Purchase::where('user_id' , auth()->id())->get();
+        $soldItemIds = Item::where('user_id', auth()->id())->pluck('id');
+        $soldMyItems = Purchase::whereIn('item_id', $soldItemIds)->get();
 
-    $unreadCount = Message::where('receiver_id', auth()->id())
-        ->where('is_read', false)
-        ->count();
+        $messageItems = $purchaseItems->merge($soldMyItems);
 
-    $itemUnreadCounts = Message::select('item_id', DB::raw('count(*) as unread_count'))
-        ->where('receiver_id', auth()->id())
-        ->where('is_read', false)
-        ->groupBy('item_id')
-        ->pluck('unread_count', 'item_id');
+        $messageItems = $messageItems->sortByDesc(function ($purchase) {
+            $latestMessage = $purchase->messages()->latest()->first();
+            return $latestMessage ? $latestMessage->created_at : $purchase->created_at;
+        });
 
-    $messageItems = $messageItems->unique(function($item) {
-        return $item->item->id;
+        $messageItems = $messageItems->map(function ($purchase) {
+            $purchase -> unreadCount = Message::where('item_id', $purchase->item_id)
+                ->where('receiver_id', auth()->id())
+                ->where('is_read', 0)
+                ->count();
+            return $purchase;
     });
-
-    foreach ($messageItems as $messageItem) {
-        $itemId = $messageItem->item->id;
-        $messageItem->unread_count = $itemUnreadCounts->get($itemId, 0);
-
-        $messages = Message::where('item_id', $itemId)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        if ($messages->count() > 0) {
-            $firstMessage = $messages->first();
-            $messageItem->firstMessageSenderId = $firstMessage->sender_id;
-        } else {
-            $messageItem->firstMessageSenderId = null;
-        }
-    }
-
-    $messageItems = $messageItems->sortByDesc(function ($item) {
-        return $item->firstMessageSenderId ? $item->firstMessageSenderId : 0;
-    });
+        $totalUnreadCount = $messageItems->sum('unreadCount');
 
     $search = '';
 
-    return view('mypage', compact('user','averageScore','roundedScore', 'sellItems', 'buyItems', 'viewTypes', 'messageItems', 'unreadCount', 'search'));
+    return view('mypage', compact('user','averageScore','roundedScore', 'sellItems', 'buyItems', 'viewTypes', 'messageItems','totalUnreadCount' , 'search'));
 }
 
 }

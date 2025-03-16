@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\MessageRequest;
@@ -23,33 +24,21 @@ class MessageController extends Controller
             ->with('sender')
             ->get();
 
-        if ($messages->count() > 0) {
-            $firstMessage = $messages->first();
-            $firstMessageSenderId = $firstMessage->sender_id;
+        if ($user->id === $item->user_id) {
 
-            $partner = auth()->id() === $firstMessage->sender_id
-                ? User::find($firstMessage->receiver_id)
-                : User::find($firstMessage->sender_id);
+        $partner = Purchase::where('item_id', $item->id)->first()?->user;
 
-            Message::where('item_id', $item->id)
-                ->where('receiver_id', auth()->id())
-                ->where('is_read', false)
-                ->update(['is_read' => true]);
         } else {
-            $partner = User::find($item->user_id);
-            $firstMessageSenderId = Message::where('item_id', $item->id)
-                ->orderBy('created_at', 'asc')
-                ->first()?->sender_id ?? auth()->id();
+
+        $partner = $item->user;
         }
 
-        $evaluationModal = false;
-        if ($messages->count() > 0) {
-            $firstMessage = $messages->first();
+        Message::where('item_id', $item->id)
+            ->where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
 
-            if ($firstMessage->is_deal_complete) {
-            $evaluationModal = true;
-            }
-        }
+        $evaluationModal = $messages->contains('is_deal_complete', true);
 
         $messageItems = Message::where(function ($query) use ($user) {
             $query->where('sender_id', $user->id)
@@ -64,7 +53,7 @@ class MessageController extends Controller
             return $messageItem->item_id == $item->id;
         });
 
-        return view('message', compact('item', 'messages', 'partner','messageItems', 'firstMessageSenderId', 'otherDealItems'))
+        return view('message', compact('item', 'messages', 'partner','messageItems','otherDealItems'))
         ->with('evaluation_modal', $evaluationModal);
     }
 
@@ -89,11 +78,8 @@ class MessageController extends Controller
             'message' => $validated['message'],
             'thumbnail' => $image_path,
         ]);
-        $firstMessageSenderId = Message::where('item_id', $item->id)
-        ->orderBy('created_at', 'asc')
-        ->first()?->sender_id ?? auth()->id();;
 
-        return redirect()->route('item.deal' , ['item' => $item->id , 'firstSenderId' => $firstMessageSenderId])
+        return redirect()->route('item.deal' , ['item' => $item->id ])
         ->with('success' , 'メッセージを送信しました。');
     }
 
@@ -135,7 +121,7 @@ class MessageController extends Controller
             ->orderBy('created_at', 'asc')
             ->first()?->sender_id ?? auth()->id();
         }
-        return redirect()->route('item.deal', ['item' => $message->item_id, 'firstSenderId' => $firstMessageSenderId])
+        return redirect()->route('item.deal', ['item' => $message->item_id])
             ->with('success', 'メッセージを編集しました。');
 
         }
@@ -149,11 +135,8 @@ class MessageController extends Controller
 
             $message->delete();
 
-            $firstMessageSenderId = Message::where('item_id', $message->item_id)
-            ->orderBy('created_at', 'asc')
-            ->first()?->sender_id ?? auth()->id();
 
-            return redirect()->route('item.deal' , ['item' => $message->item_id , 'firstSenderId' => $firstMessageSenderId])
+            return redirect()->route('item.deal' , ['item' => $message->item_id ])
             ->with('success' , 'メッセージを削除しました。');
         }
 
@@ -162,17 +145,12 @@ class MessageController extends Controller
 
         Message::where('item_id', $itemId)->update(['is_deal_complete' => true]);
 
-        $firstMessageSenderId = Message::where('item_id', $itemId)
-            ->orderBy('created_at', 'asc')
-            ->first()?->sender_id ?? auth()->id();
-
-
         $item = Item::findOrFail($itemId);
         $seller = $item->user;
 
         Mail::to($seller->email)->send(new DealCompleteNotification($item));
 
-        return redirect()->route('item.deal', ['item' => $itemId, 'firstSenderId' => $firstMessageSenderId])
+        return redirect()->route('item.deal', ['item' => $itemId ])
             ->with('evaluation_modal', true);
     }
 

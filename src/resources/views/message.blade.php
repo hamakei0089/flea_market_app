@@ -12,7 +12,7 @@
         <h2 class="deal-theme">その他の取引</h2>
             @foreach ($messageItems as $messageItem)
             <div class="item-card">
-                <a href="{{ route('item.deal', ['item' => $messageItem->item->id , 'firstSenderId' => $firstMessageSenderId]) }}" class="item-btn">
+                <a href="{{ route('item.deal', ['item' => $messageItem->item->id]) }}" class="item-btn">
                 <p class="other-item-name">{{ $messageItem->item->name }}</p>
             </a>
             </div>
@@ -23,10 +23,10 @@
         <div class="partner-container">
             <img class="partner-thumbnail" src="{{ $partner->thumbnail ? asset('storage/' . $partner->thumbnail) : asset('storage/profiles/default-thumbnail.png') }}" alt="{{ $partner->name }}" />
             <h2 class="partner-name">「{{ $partner->name }}」 さんとの取引画面</h2>
-            @if($firstMessageSenderId === auth()->id())
+            @if(auth()->id() !== $item->user_id)
                 <div class="deal-done">
-                    <form action="{{ route('deal.done', [$item->id ,'firstSenderId' => $firstMessageSenderId ]) }}" method="post">
-                            @csrf
+                    <form action="{{ route('deal.done', [$item->id]) }}" method="post">
+                    @csrf
                     <button class="deal-done-btn" type="submit" id="deal-done-btn">取引を完了する</button>
                     </form>
                 </div>
@@ -104,7 +104,7 @@
             @endforeach
         </div>
 
-        <form id="messageForm" action="{{ route('message.send', [$item->id, 'firstSenderId' => $firstMessageSenderId]) }}" method="post" enctype="multipart/form-data">
+        <form id="messageForm" action="{{ route('message.send', [$item->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="form-error">
                 @error('message')

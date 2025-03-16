@@ -3,26 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
 use App\Models\Evaluation;
 use App\Models\Message;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 
 class EvaluationController extends Controller
 {
     public function store(Request $request)
     {
-        $message = Message::where('item_id', $request->item_id)
-            ->orderBy('created_at', 'asc')
-            ->firstOrFail();
+        $userId = auth()->id();
+        $item = Item::findOrFail($request->item_id);
 
-        $evaluatedId = (Auth::id() === $message->sender_id)
-            ? $message->receiver_id
-            : $message->sender_id;
+        if ($userId === $item->user_id) {
+
+        $partnerId = Purchase::where('item_id', $item->id)->value('user_id');
+
+        } else {
+
+        $partnerId = $item->user_id;
+        }
 
         Evaluation::create([
             'item_id'      => $request->item_id,
             'evaluator_id' => Auth::id(),
-            'evaluated_id' => $evaluatedId,
+            'evaluated_id' => $partnerId,
             'score'        => $request->score,
         ]);
 

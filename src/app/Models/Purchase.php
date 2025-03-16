@@ -33,4 +33,9 @@ class Purchase extends Model
         return $this->belongsTo(PaymentMethod::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'item_id', 'item_id');
+    }
+
 }

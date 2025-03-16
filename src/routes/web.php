@@ -63,12 +63,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/purchase/{item}/success', [PurchaseController::class, 'success'])->name('purchase.success');
     Route::get('/purchase/{item}/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
 
-    Route::get('/message/{item}/{firstSenderId}', [MessageController::class, 'index'])->name('item.deal');
-    Route::post('/message/{item}/{firstSenderId}/send', [MessageController::class, 'store'])->name('message.send');
+    Route::get('/message/{item}/', [MessageController::class, 'index'])->name('item.deal');
+    Route::post('/message/{item}//send', [MessageController::class, 'store'])->name('message.send');
     Route::get('/edit/message/{message}', [MessageController::class, 'edit'])->name('message.edit');
     Route::put('/update/message/{message}', [MessageController::class, 'update'])->name('message.update');
     Route::delete('/delete/message/{message}', [MessageController::class, 'destroy'])->name('message.destroy');
-    Route::post('/message/{item}/{firstSenderId}/done', [MessageController::class, 'dealDone'])->name('deal.done');
+    Route::post('/message/{item}//done', [MessageController::class, 'dealDone'])->name('deal.done');
 
     Route::post('/deal/evaluation', [EvaluationController::class, 'store'])->name('evaluation.store');
 
