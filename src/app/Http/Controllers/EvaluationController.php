@@ -25,6 +25,14 @@ class EvaluationController extends Controller
         $partnerId = $item->user_id;
         }
 
+        $alreadyEvaluated = Evaluation::where('item_id', $request->item_id)
+        ->where('evaluator_id', $userId)
+        ->where('evaluated_id', $partnerId)
+        ->exists();
+
+        if ($alreadyEvaluated) {
+            return redirect()->back()->with('error', '既に評価済みです。');
+        }
         Evaluation::create([
             'item_id'      => $request->item_id,
             'evaluator_id' => Auth::id(),

@@ -50,6 +50,9 @@
                                     @endfor
                                 </div>
                                 <div class="btn">
+                                    @if(session('error'))
+                                        <p class="registration-error">{{ session('error') }}</p>
+                                    @endif
                                     <button type="submit" class="evaluation-btn">送信する</button>
                                 </div>
                             </form>
